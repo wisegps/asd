@@ -44,7 +44,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class OfflineActivity extends Activity{
@@ -56,7 +55,6 @@ public class OfflineActivity extends Activity{
 	Spinner s_car;
 	ImageView iv_button_start;
 	Button iv_open,iv_lock,iv_un_contor,bt_control_call,bt_contor_location;
-	TextView tv_refresh_control;
 	SmsContent content;
 	List<OfflineData> list;
 	OfflineData offlineData;
@@ -88,8 +86,6 @@ public class OfflineActivity extends Activity{
 		bt_control_call.setOnClickListener(onClickListener);
 		bt_contor_location = (Button)findViewById(R.id.bt_contor_location);
 		bt_contor_location.setOnClickListener(onClickListener);
-		tv_refresh_control = (TextView)findViewById(R.id.tv_refresh_control);
-		tv_refresh_control.setVisibility(View.GONE);
 		GetUserLocation();
 		bindSpinner();
 		

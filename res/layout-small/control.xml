@@ -120,14 +120,4 @@
             android:background="@drawable/bt_bottom_bg_right"
             android:text="@string/one_location"/>
     </LinearLayout>
-    <TextView 
-        android:id="@+id/tv_refresh_control"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_address"
-        android:textColor="#FFFFFF"
-        android:gravity="center_horizontal"
-        android:visibility="gone"
-        android:text="@string/refresh_control"/>
 </RelativeLayout>

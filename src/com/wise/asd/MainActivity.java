@@ -119,7 +119,6 @@ public class MainActivity extends MapActivity{
 	private final int SEND_SOUND = 11;   //静音,声光
 	private final int SEND_SOUND_OK = 12;   //静音,声光状态更新成功
 	private final int SEND_START_OK = 13;   //启动,熄火状态更新成功
-	private final int REFRESH_CONTROL_OK = 14; //刷新状态成功
 	private final int GET_AUTH_CODE = 15; //获取业务服务器code
 	private final int OPEN_BOX = 16;
 	
@@ -132,7 +131,6 @@ public class MainActivity extends MapActivity{
 	Spinner s_carid,s_car;
 	Button bt_ZoomDown,bt_ZoomUp,bt_contor_location,bt_contor_Diagnosis,iv_open,bt_control_call,iv_lock,iv_contor,iv_un_contor;
 	ImageView iv_aTraffic,iv_map,iv_control,iv_pref,iv_Me,iv_button_start,iv_UnReadMsg,iv_perfrenece_UnReadMsg,iv_car;
-	TextView tv_refresh_control;	
 	
 	ProgressDialog Dialog = null;    //progress
 	View popView;     // 气泡窗口
@@ -140,7 +138,6 @@ public class MainActivity extends MapActivity{
 	int index = 0;    //当前定位到那个车
 	boolean isGetData = true;
 	String address;
-	boolean isRefreshP20 = true;  //是否更新P20状态，ture可以发送指令
 	boolean is_lockdoor = false;  //true锁车,false开锁
 	boolean is_sound = false;    //true是发的静音指令，false发的是声光
 	boolean is_start_now = false; //start指令是否发送,是不能点击
@@ -238,15 +235,7 @@ public class MainActivity extends MapActivity{
 				break;
 			case R.id.iv_control:// 指令页面
 				flipper.setDisplayedChild(0);
-				bg_set(0);
-				SendCmd(CMD_P20STATUS,SEND_CMD);
-				if(carData != null){
-					if(isRefreshP20){
-						isRefreshP20 = false;
-						tv_refresh_control.setVisibility(View.VISIBLE);
-						new Thread(new P20STATUSThread()).start();
-					}
-		    	}				
+				bg_set(0);				
 				break;
 			case R.id.iv_pref://配置页面
 				flipper.setDisplayedChild(2);
@@ -332,9 +321,6 @@ public class MainActivity extends MapActivity{
 					is_start = "2";
 				}
 				break;
-			case REFRESH_CONTROL_OK :
-				tv_refresh_control.setVisibility(View.GONE);
-				break;
 			case GET_AUTH_CODE:
 				Log.d(TAG, msg.toString());
 				try {
@@ -353,6 +339,9 @@ public class MainActivity extends MapActivity{
 				if(msg.obj.toString().indexOf("0")>-1){
 					Toast.makeText(getApplicationContext(), "尾箱开启成功", Toast.LENGTH_SHORT).show();
 				}
+				break;
+			case SEND_CMD:
+				Log.d(TAG, "发送指令返回="+msg.obj.toString());
 				break;
 			}
 		}    	
@@ -377,67 +366,65 @@ public class MainActivity extends MapActivity{
     private void onClickStart(){
     	if(carData == null){
     		return;
-    	}
-    	if(isRefreshP20){//是否在刷新状态			
-			if(is_start_now){//是否指令在发送中
-				return;
-			}
-			String message = "";
-			if(is_start.equals("2")){//熄火
-				message = getString(R.string.stop_engine);
-			}else if(is_start.equals("0")){//启动				
-				message = getString(R.string.start_engine);
-			}else{//启动状态跳出 is_start = 1
-				ToastCar(is_start);
-				return;
-			}			
-			if(!is_lockdoor){//是否锁车
-				Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
-				return;
-			}
-			//是否p20;
-			if(isP20()){
-				AlertDialog.Builder Builder = new AlertDialog.Builder(MainActivity.this);
-				Builder.setTitle(R.string.Note);
-				Builder.setMessage(message);
-				Builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {							
-					public void onClick(DialogInterface dialog, int which) {						
-						if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
-							if(isOffine()){//离线发送短信
-								if(is_start.equals("2")){
-									SendSms(R.string.car_offline_send_sms, cmd_stop);
-								}else if(is_start.equals("0")){
-									SendSms(R.string.car_offline_send_sms, cmd_start);
-								}
-							}else{
-								String cmd_type = CMD_STARTENGINE;
-								String message = getString(R.string.STARTENGINE);
-								if(is_start.equals("2")){
-									//熄火
-									cmd_type = CMD_STOPENGINE;
-									message = getString(R.string.STARTENGINE_false);
-									iv_button_start.setBackgroundResource(R.drawable.button_stop_press);
-								}else if(is_start.equals("0")){
-									iv_button_start.setBackgroundResource(R.drawable.button_start_press);
-								}
-								SendCmd(cmd_type,SEND_START);
-								Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-								is_start_now = true;
-							}
-						}else{//无网,发送短信
+    	}		
+		if(is_start_now){//是否指令在发送中
+			return;
+		}
+		String message = "";
+		if(is_start.equals("2")){//熄火
+			message = getString(R.string.stop_engine);
+		}else if(is_start.equals("0")){//启动				
+			message = getString(R.string.start_engine);
+		}else{//启动状态跳出 is_start = 1
+			ToastCar(is_start);
+			return;
+		}			
+		if(!is_lockdoor){//是否锁车
+			Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		//是否p20;
+		if(isP20()){
+			AlertDialog.Builder Builder = new AlertDialog.Builder(MainActivity.this);
+			Builder.setTitle(R.string.Note);
+			Builder.setMessage(message);
+			Builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {							
+				public void onClick(DialogInterface dialog, int which) {						
+					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
+						if(isOffine()){//离线发送短信
 							if(is_start.equals("2")){
-								SendSms(R.string.net_wrong_send_sms, cmd_stop);
+								SendSms(R.string.car_offline_send_sms, cmd_stop);
 							}else if(is_start.equals("0")){
-								SendSms(R.string.net_wrong_send_sms, cmd_start);
+								SendSms(R.string.car_offline_send_sms, cmd_start);
 							}
+						}else{
+							String cmd_type = CMD_STARTENGINE;
+							String message = getString(R.string.STARTENGINE);
+							if(is_start.equals("2")){
+								//熄火
+								cmd_type = CMD_STOPENGINE;
+								message = getString(R.string.STARTENGINE_false);
+								iv_button_start.setBackgroundResource(R.drawable.button_stop_press);
+							}else if(is_start.equals("0")){
+								iv_button_start.setBackgroundResource(R.drawable.button_start_press);
+							}
+							SendCmd(cmd_type,SEND_START);
+							Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+							is_start_now = true;
+						}
+					}else{//无网,发送短信
+						if(is_start.equals("2")){
+							SendSms(R.string.net_wrong_send_sms, cmd_stop);
+						}else if(is_start.equals("0")){
+							SendSms(R.string.net_wrong_send_sms, cmd_start);
 						}
 					}
-				});
-				Builder.setNegativeButton(R.string.cancle, null);
-				Builder.show();
-			}else{
-				Toast.makeText(getApplicationContext(), R.string.add_p20, Toast.LENGTH_SHORT).show();
-			}
+				}
+			});
+			Builder.setNegativeButton(R.string.cancle, null);
+			Builder.show();
+		}else{
+			Toast.makeText(getApplicationContext(), R.string.add_p20, Toast.LENGTH_SHORT).show();
 		}
     }
     /**
@@ -447,33 +434,31 @@ public class MainActivity extends MapActivity{
     	if(carData == null){
     		return;
     	}
-    	if(isRefreshP20){
-			if(isP20()){
-				is_lockdoor_arming = true;
-				if(is_lockdoor){
-					if(is_start.equals("0")){
-						if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
-							if(isOffine()){//离线发送短信
-								SendSms(R.string.car_offline_send_sms, cmd_open);
-							}else{
-								SendCmd(CMD_UNLOCKDOOR,SEND_OPEN);
-								Toast.makeText(getApplicationContext(), R.string.UNLOCK, Toast.LENGTH_LONG).show();
-							}
+		if(isP20()){
+			is_lockdoor_arming = true;
+			if(is_lockdoor){
+				if(is_start.equals("0")){
+					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
+						if(isOffine()){//离线发送短信
+							SendSms(R.string.car_offline_send_sms, cmd_open);
 						}else{
-							SendSms(R.string.net_wrong_send_sms, cmd_open);
-						}						
-						
+							SendCmd(CMD_UNLOCKDOOR,SEND_OPEN);
+							Toast.makeText(getApplicationContext(), R.string.UNLOCK, Toast.LENGTH_LONG).show();
+						}
 					}else{
-						ToastCar(is_start);
-					}
-				}else{//锁车状态发锁车为开锁
-					Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+						SendSms(R.string.net_wrong_send_sms, cmd_open);
+					}						
+					
+				}else{
+					ToastCar(is_start);
 				}
-			}else{
-				is_lockdoor_arming = false;
-				SendCmd(CMD_DISARMING,SEND_OPEN);
-				Toast.makeText(getApplicationContext(), R.string.DISARMING, Toast.LENGTH_LONG).show();
+			}else{//锁车状态发锁车为开锁
+				Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 			}
+		}else{
+			is_lockdoor_arming = false;
+			SendCmd(CMD_DISARMING,SEND_OPEN);
+			Toast.makeText(getApplicationContext(), R.string.DISARMING, Toast.LENGTH_LONG).show();
 		}
     }
     /**
@@ -483,32 +468,30 @@ public class MainActivity extends MapActivity{
     	if(carData == null){
     		return;
     	}
-    	if(isRefreshP20){
-			if(isP20()){
-				is_lock = true;
-				if(is_lockdoor){//锁车状态发锁车
-					Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
-				}else{
-					if(is_start.equals("0")){
-						if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
-							if(isOffine()){//离线发送短信
-								SendSms(R.string.car_offline_send_sms, cmd_lock);
-							}else{
-								SendCmd(CMD_LOCKDOOR,SEND_CLOSE);
-								Toast.makeText(getApplicationContext(), R.string.LOCK, Toast.LENGTH_LONG).show();
-							}
-						}else{
-							SendSms(R.string.net_wrong_send_sms, cmd_lock);
-						}						
-					}else{
-						ToastCar(is_start);
-					}
-				}
+		if(isP20()){
+			is_lock = true;
+			if(is_lockdoor){//锁车状态发锁车
+				Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 			}else{
-				is_lock = false;
-				SendCmd(CMD_ARMING,SEND_CLOSE);
-				Toast.makeText(getApplicationContext(), R.string.ARMING, Toast.LENGTH_LONG).show();
-			}			
+				if(is_start.equals("0")){
+					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
+						if(isOffine()){//离线发送短信
+							SendSms(R.string.car_offline_send_sms, cmd_lock);
+						}else{
+							SendCmd(CMD_LOCKDOOR,SEND_CLOSE);
+							Toast.makeText(getApplicationContext(), R.string.LOCK, Toast.LENGTH_LONG).show();
+						}
+					}else{
+						SendSms(R.string.net_wrong_send_sms, cmd_lock);
+					}						
+				}else{
+					ToastCar(is_start);
+				}
+			}
+		}else{
+			is_lock = false;
+			SendCmd(CMD_ARMING,SEND_CLOSE);
+			Toast.makeText(getApplicationContext(), R.string.ARMING, Toast.LENGTH_LONG).show();
 		}
     }
     /**
@@ -518,19 +501,17 @@ public class MainActivity extends MapActivity{
     	if(carData == null){
     		return;
     	}
-    	if(isRefreshP20){
-			if(is_lockdoor == true){
-				if(!isOffine()){
-					if(is_start.equals("0")){
-						SendCmd(CMD_FINDVEHICLE,SEND_CMD);
-						Toast.makeText(getApplicationContext(), R.string.FINDVEHICLE, Toast.LENGTH_LONG).show();
-					}else{
-						ToastCar(is_start);
-					}
+		if(is_lockdoor == true){
+			if(!isOffine()){
+				if(is_start.equals("0")){
+					SendCmd(CMD_FINDVEHICLE,SEND_CMD);
+					Toast.makeText(getApplicationContext(), R.string.FINDVEHICLE, Toast.LENGTH_LONG).show();
+				}else{
+					ToastCar(is_start);
 				}
-			}else{
-				Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 			}
+		}else{
+			Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 		}
     }
     /**
@@ -540,39 +521,37 @@ public class MainActivity extends MapActivity{
     	if(carData == null){
     		return;
     	}
-    	if(isRefreshP20){
-			if(is_lockdoor == true){
-				Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
-			}else{
-				if(!isOffine()){
-					if(is_start.equals("0")){
-						String message = getString(R.string.SEND_SOUND);
-						if(is_sound){
-							message = getString(R.string.SEND_SOUND_false);
-						}
-						AlertDialog.Builder Builder = new AlertDialog.Builder(MainActivity.this);
-						Builder.setTitle(R.string.Note);
-						Builder.setMessage(message);
-						Builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {							
-							public void onClick(DialogInterface dialog, int which) {
-								String cmd_type = CMD_SOUND;
-								String message = getString(R.string.SOUND);
-								if(is_sound){
-									cmd_type = CMD_SLIENT;
-									message = getString(R.string.SOUND_false);
-								}
-								SendCmd(cmd_type,SEND_SOUND);
-								Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+		if(is_lockdoor == true){
+			Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+		}else{
+			if(!isOffine()){
+				if(is_start.equals("0")){
+					String message = getString(R.string.SEND_SOUND);
+					if(is_sound){
+						message = getString(R.string.SEND_SOUND_false);
+					}
+					AlertDialog.Builder Builder = new AlertDialog.Builder(MainActivity.this);
+					Builder.setTitle(R.string.Note);
+					Builder.setMessage(message);
+					Builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {							
+						public void onClick(DialogInterface dialog, int which) {
+							String cmd_type = CMD_SOUND;
+							String message = getString(R.string.SOUND);
+							if(is_sound){
+								cmd_type = CMD_SLIENT;
+								message = getString(R.string.SOUND_false);
 							}
-						});
-						Builder.setNegativeButton(R.string.cancle, null);
-						Builder.show();
-					}else{
+							SendCmd(cmd_type,SEND_SOUND);
+							Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+						}
+					});
+					Builder.setNegativeButton(R.string.cancle, null);
+					Builder.show();
+				}else{
 						ToastCar(is_start);
 					}
 				}
 			}
-		}
     }
     /**
      * 一键呼叫
@@ -799,27 +778,7 @@ public class MainActivity extends MapActivity{
     	} catch (Exception e) {
 			Log.e(TAG, "获取车辆状态异常");
 		}
-    }    
-	/**
-	 * 发送P20指令后延迟5S可以控制车辆
-	 * @author honesty
-	 */
-	class P20STATUSThread extends Thread{
-		@Override
-		public void run() {
-			super.run();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}finally{
-				isRefreshP20 = true;
-				Message message = new Message();
-				message.what = REFRESH_CONTROL_OK;
-				handler.sendMessage(message);
-			}
-		}
-	}
+    }
 	/**
 	 * 发送指令
 	 * @param cmd_type  指令编码
@@ -1366,7 +1325,8 @@ public class MainActivity extends MapActivity{
     				try {
     					if (Config.carDatas.size()>0) {
     						i++;
-    						GetCmdInfo();
+    						GetCmdInfo();//获取最新状态
+    						SendCmd(CMD_P20STATUS,SEND_CMD);//发送刷新指令
     						if(i == 1){
     							GetCarInfo();
         						GetUnReadMessageNumber();
@@ -1540,7 +1500,6 @@ public class MainActivity extends MapActivity{
 		bt_contor_Diagnosis.setOnClickListener(onClickListener);
 		bt_control_call = (Button)controlView.findViewById(R.id.bt_control_call);
 		bt_control_call.setOnClickListener(onClickListener);
-		tv_refresh_control = (TextView)controlView.findViewById(R.id.tv_refresh_control);
         //地图页面
         View mapView = mLayoutInflater.inflate(R.layout.map, null);
 		flipper.addView(mapView);

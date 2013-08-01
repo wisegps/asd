@@ -256,13 +256,15 @@ public class LoginActivity extends Activity{
      * @param msg
      */
     private void UpdateData(Message msg){
-    	try {
-			JSONObject jsonObject = new JSONObject(msg.obj.toString());
-			SharedPreferences preferences = getSharedPreferences(Config.sharedPreferencesName, Context.MODE_PRIVATE);
-			Editor editor = preferences.edit();
-			editor.putString("Verson", jsonObject.getString("version"));
-			editor.putString("VersonUrl", jsonObject.getString("app_path"));
-			editor.commit();
+    	try {    		
+    		if(!msg.obj.toString().equals("")){
+    			JSONObject jsonObject = new JSONObject(msg.obj.toString());
+    			SharedPreferences preferences = getSharedPreferences(Config.sharedPreferencesName, Context.MODE_PRIVATE);
+    			Editor editor = preferences.edit();
+    			editor.putString("Verson", jsonObject.getString("version"));
+    			editor.putString("VersonUrl", jsonObject.getString("app_path"));
+    			editor.commit();
+    		}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -104,7 +104,6 @@
    	<string name="FINDVEHICLE">寻车</string>
    	<string name="SOUND">声光</string>
    	<string name="SOUND_false">静音</string>
-   	<string name="refresh_control">正在获取车辆状态,请稍等...</string>
    	<string name="net_wrong_send_sms">网络异常,是否使用短信发送指令</string>
    	<string name="car_offline_send_sms">车辆离线,是否使用短信发送指令</string>
     
