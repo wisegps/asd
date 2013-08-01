@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+<resources> 
+<color name="white">#FFFFFF</color><!--白色 -->   
+<color name="yellow">#FFFF00</color><!--黄色 -->  
+<color name="tv_color">#000000</color><!--黑色 -->  
+<color name="gray">#DBDBDB</color><!--黑色 -->  
+<color name="bt_bg">#E0832F</color><!--黑色 -->  
+
+<color name="bt_check">#CBC9C9</color><!--黑色 -->  
+</resources>  

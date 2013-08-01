@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bubble_background"
+    android:paddingLeft="10px"
+    android:paddingTop="10px"
+    android:paddingRight="10px"
+    android:paddingBottom="30px">
+    <TextView 
+       android:id="@+id/pop_car_id" 
+       android:ellipsize="marquee" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:textSize="16dp"/>
+    <TextView 
+       android:id="@+id/pop_car_GpsTime" 
+       android:layout_width="260dp" 
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:textSize="16dp"/>
+    <TextView 
+       android:id="@+id/pop_car_MSTStatus" 
+       android:layout_width="260dp" 
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:textSize="16dp"/>
+    <TextView 
+       android:id="@+id/pop_car_Speed" 
+       android:layout_width="260dp" 
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:textSize="16dp"/>
+</LinearLayout>

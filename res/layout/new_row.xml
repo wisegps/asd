@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:paddingLeft="5dp">    
+    <TextView 
+        android:id="@+id/tv_new_Regnum"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:textColor="#000000"
+        android:gravity="bottom"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/iv_sms_show"/>    
+    <TextView 
+        android:id="@+id/tv_new_time"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:textColor="#000000"
+        android:gravity="bottom"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/iv_sms_show"
+        android:layout_below="@+id/tv_new_Regnum"/>    
+    <TextView 
+        android:id="@+id/tv_new_content"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/iv_sms_show"
+        android:layout_below="@+id/tv_new_time"/>    
+    <ImageView 
+        android:id="@+id/iv_sms_show"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/image_description"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:src="@drawable/car"/>
+</RelativeLayout>

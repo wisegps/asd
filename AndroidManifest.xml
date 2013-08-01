@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wise.asd"
+    android:versionCode="12"
+    android:versionName="2.2" >
+    <uses-sdk android:minSdkVersion="7"/>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />  
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> 
+	<uses-permission android:name="android.permission.SEND_SMS" /> 
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+	<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <application android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme" >
+        <activity android:name=".LoginActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
+        <activity android:name=".RegisterActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".SmsActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".CarActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".PersonActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".AddCarActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".PhoneActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".AboutActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".FeedbcakActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".OfflineActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
+        <activity android:name=".BluetoothActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
+    	<service android:name="com.wise.bluetoothUtil.BluetoothServerService"></service>
+    	<receiver android:name=".StartReceiver" android:label="@string/app_name"> 
+		    <intent-filter> 
+		       <action android:name="android.intent.action.BOOT_COMPLETED" /> 
+		       <category android:name="android.intent.category.LAUNCHER" /> 
+		    </intent-filter> 
+		</receiver>
+    </application>
+    <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:resizeable="true" android:anyDensity="true"/>
+</manifest>
