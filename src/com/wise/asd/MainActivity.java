@@ -98,10 +98,10 @@ public class MainActivity extends MapActivity{
 	private final String CMD_LOCKDOOR = "16416";  //锁车
 	private final String CMD_ARMING = "16393";   //设防
 	private final String CMD_FINDVEHICLE = "16420"; //寻车
-	private final String CMD_SLIENT = "16408";     //禁音
-	private final String CMD_SOUND = "16409";     //声光
-	private final String CMD_P20STATUS = "16425";//获取P20状态
-	private final String CMD_OPENTRAIL = "16436"; //打开尾箱
+	private final String CMD_SLIENT = "16408";     	//禁音
+	private final String CMD_SOUND = "16409";     	//声光
+	private final String CMD_P20STATUS = "16425";	//获取P20状态
+	private final String CMD_OPENTRAIL = "16436"; 	//打开尾箱
 	private static final String cmd_open = "KS";
 	private static final String cmd_lock = "GS";
 	private static final String cmd_start = "QD";
@@ -120,7 +120,7 @@ public class MainActivity extends MapActivity{
 	private final int SEND_SOUND_OK = 12;   //静音,声光状态更新成功
 	private final int SEND_START_OK = 13;   //启动,熄火状态更新成功
 	private final int GET_AUTH_CODE = 15; //获取业务服务器code
-	private final int OPEN_BOX = 16;
+	private final int OPEN_BOX = 16;		//打开后备箱
 	
     int notification_id=19172439;
     NotificationManager nm ;
