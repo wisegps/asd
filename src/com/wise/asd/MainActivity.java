@@ -1743,10 +1743,10 @@ public class MainActivity extends MapActivity{
 	}
 	private void SendSms(int message, final String cmd){
 		new AlertDialog.Builder(MainActivity.this)
-		.setTitle("提示")
+		.setTitle(getString(R.string.Note))
 		.setMessage(message)
-		.setNegativeButton("取消", null)
-		.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+		.setNegativeButton(getString(R.string.cancle), null)
+		.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int which) {
 				Log.d(TAG, sim + "," + cmd);
 				SmsManager sms = SmsManager.getDefault();
