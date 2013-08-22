@@ -131,7 +131,7 @@ public class MainActivity extends MapActivity{
 	Spinner s_carid,s_car;
 	Button bt_ZoomDown,bt_ZoomUp,bt_contor_location,bt_contor_Diagnosis,iv_open,bt_control_call,iv_lock,iv_contor,iv_un_contor;
 	ImageView iv_aTraffic,iv_map,iv_control,iv_pref,iv_Me,iv_button_start,iv_UnReadMsg,iv_perfrenece_UnReadMsg,iv_car;
-	
+	TextView tv_control_isOnLine;
 	ProgressDialog Dialog = null;    //progress
 	View popView;     // 气泡窗口
 	boolean IsTraffic = false; //实时交通
@@ -147,6 +147,7 @@ public class MainActivity extends MapActivity{
 	String accessory = "0";
 	int PicSize = 16;
     boolean isAppPause = false; //程序暂停
+    boolean isControl = true; //控制界面，60s发送指令
     boolean isBlueServer = false;
     SendMessageBroadCastReceiver sendMessageBroadCastReceiver;
 	CarData carData;    
@@ -230,14 +231,19 @@ public class MainActivity extends MapActivity{
 				onClickLocation();
 				break;
 			case R.id.iv_map://地图页面
+				isControl = false;
 				flipper.setDisplayedChild(1);
 				bg_set(1);
 				break;
 			case R.id.iv_control:// 指令页面
+				isControl = true;
+				Toast.makeText(getApplicationContext(), "刷新车辆状态", Toast.LENGTH_SHORT).show();
+				SendCmd(CMD_P20STATUS,SEND_CMD);//发送刷新指令
 				flipper.setDisplayedChild(0);
 				bg_set(0);				
 				break;
 			case R.id.iv_pref://配置页面
+				isControl = false;
 				flipper.setDisplayedChild(2);
 				bg_set(2);
 				break;
@@ -341,7 +347,6 @@ public class MainActivity extends MapActivity{
 				}
 				break;
 			case SEND_CMD:
-				Log.d(TAG, "发送指令返回="+msg.obj.toString());
 				break;
 			}
 		}    	
@@ -366,66 +371,70 @@ public class MainActivity extends MapActivity{
     private void onClickStart(){
     	if(carData == null){
     		return;
+    	}
+    	if(isOffine()){
+    		SendSms(R.string.car_offline_send_sms, cmd_start);
+    	}else{
+    		if(is_start_now){//是否指令在发送中
+    			return;
+    		}
+    		String message = "";
+    		if(is_start.equals("2")){//熄火
+    			message = getString(R.string.stop_engine);
+    		}else if(is_start.equals("0")){//启动				
+    			message = getString(R.string.start_engine);
+    		}else{//启动状态跳出 is_start = 1
+    			ToastCar(is_start);
+    			return;
+    		}			
+    		if(!is_lockdoor){//是否锁车
+    			Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+    			return;
+    		}
+    		//是否p20;
+    		if(isP20()){
+    			AlertDialog.Builder Builder = new AlertDialog.Builder(MainActivity.this);
+    			Builder.setTitle(R.string.Note);
+    			Builder.setMessage(message);
+    			Builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {							
+    				public void onClick(DialogInterface dialog, int which) {						
+    					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
+    						if(isOffine()){//离线发送短信
+    							if(is_start.equals("2")){
+    								SendSms(R.string.car_offline_send_sms, cmd_stop);
+    							}else if(is_start.equals("0")){
+    								SendSms(R.string.car_offline_send_sms, cmd_start);
+    							}
+    						}else{
+    							String cmd_type = CMD_STARTENGINE;
+    							String message = getString(R.string.STARTENGINE);
+    							if(is_start.equals("2")){
+    								//熄火
+    								cmd_type = CMD_STOPENGINE;
+    								message = getString(R.string.STARTENGINE_false);
+    								iv_button_start.setBackgroundResource(R.drawable.button_stop_press);
+    							}else if(is_start.equals("0")){
+    								iv_button_start.setBackgroundResource(R.drawable.button_start_press);
+    							}
+    							SendCmd(cmd_type,SEND_START);
+    							Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    							is_start_now = true;
+    						}
+    					}else{//无网,发送短信
+    						if(is_start.equals("2")){
+    							SendSms(R.string.net_wrong_send_sms, cmd_stop);
+    						}else if(is_start.equals("0")){
+    							SendSms(R.string.net_wrong_send_sms, cmd_start);
+    						}
+    					}
+    				}
+    			});
+    			Builder.setNegativeButton(R.string.cancle, null);
+    			Builder.show();
+    		}else{
+    			Toast.makeText(getApplicationContext(), R.string.add_p20, Toast.LENGTH_SHORT).show();
+    		}
     	}		
-		if(is_start_now){//是否指令在发送中
-			return;
-		}
-		String message = "";
-		if(is_start.equals("2")){//熄火
-			message = getString(R.string.stop_engine);
-		}else if(is_start.equals("0")){//启动				
-			message = getString(R.string.start_engine);
-		}else{//启动状态跳出 is_start = 1
-			ToastCar(is_start);
-			return;
-		}			
-		if(!is_lockdoor){//是否锁车
-			Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
-			return;
-		}
-		//是否p20;
-		if(isP20()){
-			AlertDialog.Builder Builder = new AlertDialog.Builder(MainActivity.this);
-			Builder.setTitle(R.string.Note);
-			Builder.setMessage(message);
-			Builder.setPositiveButton(R.string.Sure, new DialogInterface.OnClickListener() {							
-				public void onClick(DialogInterface dialog, int which) {						
-					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
-						if(isOffine()){//离线发送短信
-							if(is_start.equals("2")){
-								SendSms(R.string.car_offline_send_sms, cmd_stop);
-							}else if(is_start.equals("0")){
-								SendSms(R.string.car_offline_send_sms, cmd_start);
-							}
-						}else{
-							String cmd_type = CMD_STARTENGINE;
-							String message = getString(R.string.STARTENGINE);
-							if(is_start.equals("2")){
-								//熄火
-								cmd_type = CMD_STOPENGINE;
-								message = getString(R.string.STARTENGINE_false);
-								iv_button_start.setBackgroundResource(R.drawable.button_stop_press);
-							}else if(is_start.equals("0")){
-								iv_button_start.setBackgroundResource(R.drawable.button_start_press);
-							}
-							SendCmd(cmd_type,SEND_START);
-							Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-							is_start_now = true;
-						}
-					}else{//无网,发送短信
-						if(is_start.equals("2")){
-							SendSms(R.string.net_wrong_send_sms, cmd_stop);
-						}else if(is_start.equals("0")){
-							SendSms(R.string.net_wrong_send_sms, cmd_start);
-						}
-					}
-				}
-			});
-			Builder.setNegativeButton(R.string.cancle, null);
-			Builder.show();
-		}else{
-			Toast.makeText(getApplicationContext(), R.string.add_p20, Toast.LENGTH_SHORT).show();
-		}
     }
     /**
      * 开锁
@@ -436,25 +445,29 @@ public class MainActivity extends MapActivity{
     	}
 		if(isP20()){
 			is_lockdoor_arming = true;
-			if(is_lockdoor){
-				if(is_start.equals("0")){
-					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
-						if(isOffine()){//离线发送短信
-							SendSms(R.string.car_offline_send_sms, cmd_open);
+			if(isOffine()){
+				SendSms(R.string.car_offline_send_sms, cmd_open);
+			}else{
+				if(is_lockdoor){
+					if(is_start.equals("0")){
+						if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
+							if(isOffine()){//离线发送短信
+								SendSms(R.string.car_offline_send_sms, cmd_open);
+							}else{
+								SendCmd(CMD_UNLOCKDOOR,SEND_OPEN);
+								Toast.makeText(getApplicationContext(), R.string.UNLOCK, Toast.LENGTH_LONG).show();
+							}
 						}else{
-							SendCmd(CMD_UNLOCKDOOR,SEND_OPEN);
-							Toast.makeText(getApplicationContext(), R.string.UNLOCK, Toast.LENGTH_LONG).show();
-						}
+							SendSms(R.string.net_wrong_send_sms, cmd_open);
+						}						
+						
 					}else{
-						SendSms(R.string.net_wrong_send_sms, cmd_open);
-					}						
-					
-				}else{
-					ToastCar(is_start);
+						ToastCar(is_start);
+					}
+				}else{//锁车状态发锁车为开锁
+					Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 				}
-			}else{//锁车状态发锁车为开锁
-				Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
-			}
+			}			
 		}else{
 			is_lockdoor_arming = false;
 			SendCmd(CMD_DISARMING,SEND_OPEN);
@@ -470,24 +483,28 @@ public class MainActivity extends MapActivity{
     	}
 		if(isP20()){
 			is_lock = true;
-			if(is_lockdoor){//锁车状态发锁车
-				Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			if(isOffine()){
+				SendSms(R.string.car_offline_send_sms, cmd_lock);
 			}else{
-				if(is_start.equals("0")){
-					if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
-						if(isOffine()){//离线发送短信
-							SendSms(R.string.car_offline_send_sms, cmd_lock);
-						}else{
-							SendCmd(CMD_LOCKDOOR,SEND_CLOSE);
-							Toast.makeText(getApplicationContext(), R.string.LOCK, Toast.LENGTH_LONG).show();
-						}
-					}else{
-						SendSms(R.string.net_wrong_send_sms, cmd_lock);
-					}						
+				if(is_lockdoor){//锁车状态发锁车
+					Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 				}else{
-					ToastCar(is_start);
+					if(is_start.equals("0")){
+						if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
+							if(isOffine()){//离线发送短信
+								SendSms(R.string.car_offline_send_sms, cmd_lock);
+							}else{
+								SendCmd(CMD_LOCKDOOR,SEND_CLOSE);
+								Toast.makeText(getApplicationContext(), R.string.LOCK, Toast.LENGTH_LONG).show();
+							}
+						}else{
+							SendSms(R.string.net_wrong_send_sms, cmd_lock);
+						}						
+					}else{
+						ToastCar(is_start);
+					}
 				}
-			}
+			}			
 		}else{
 			is_lock = false;
 			SendCmd(CMD_ARMING,SEND_CLOSE);
@@ -639,6 +656,9 @@ public class MainActivity extends MapActivity{
     			rl_car_top.setVisibility(View.GONE);
     			s_car.setVisibility(View.INVISIBLE);
     		}
+    		if(Config.carDatas.size() != 0){
+    			tv_control_isOnLine.setVisibility(View.VISIBLE);
+    		}
     		bindSpinner();
     		//读取车辆的auth_code和obj_id
     		String url = Config.carDatas.get(index).getUrl() + "app_login?username=" + Config.account + "&password=" + GetSystem.getM5DEndo(Config.pwd) +"&mac=" + GetSystem.getMacAddress(getApplicationContext()) + "&serial=" + Config.carDatas.get(index).getSerial();
@@ -692,89 +712,118 @@ public class MainActivity extends MapActivity{
         		JSONArray jsonArray1 = jsonData.getJSONArray("uni_alerts");
         		String status = getStatusDesc(carData.getRcv_time(), carData.getGps_flag(), carData.getSpeed(), getUniStatusDesc(jsonArray), getUniAlertsDesc(jsonArray1));
         		carData.setStatus(status);
-        		if(isOffine()){//离线提示
-        			Toast.makeText(getApplicationContext(), R.string.car_offine, Toast.LENGTH_SHORT).show();
-        		}
+        		//if(isOffine()){//离线提示
+        			//Toast.makeText(getApplicationContext(), R.string.car_offine, Toast.LENGTH_SHORT).show();
+        		//}
 			}
 		} catch (Exception e) {
 			Log.e(TAG, "获取车辆位置异常");
 		}
-    }    
+    }  
+    //TODO 显示状态
     /**
      * 根据车辆状态显示图片
      * @param str
      */
     public void Refresh(String str){
     	try {
-			JSONObject jsonObject1 = new JSONObject(str);
-			try {
-				accessory = jsonObject1.getString("accessory");
-			} catch (Exception e) {
-				accessory = "0";
-			}
-			JSONArray jsonArray = jsonObject1.getJSONArray("call_phones");
-			for(int i = 0 ; i < jsonArray.length() ; i++){
-				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				PhoneData phoneData = new PhoneData();
-				phoneData.setName(jsonObject.getString("name"));
-				phoneData.setPhone(jsonObject.getString("phone"));
-				phoneDatas.add(phoneData);
-			}
-			JSONObject jsonObject = jsonObject1.getJSONObject("params");
-			try {//是否声光
-				if(jsonObject.getString("is_sound").equals("true")){//显示图标为声光
-					is_sound = true;					
-					iv_un_contor.setBackgroundResource(R.drawable.iv_un_contor);
-					iv_un_contor.setText(R.string.SOUND);
-				}else{//显示图标为静音
-					is_sound = false;					
-					iv_un_contor.setBackgroundResource(R.drawable.iv_sound_false);
-					iv_un_contor.setText(R.string.SOUND_false);
-				}						
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			is_start = jsonObject.getString("is_start");
-			if(!is_start_now){//是否正在发送启动指令				
-				try {
-					if(is_start.equals("0")){
-						iv_button_start.setBackgroundResource(R.drawable.iv_button_start);
-					}else if(is_start.equals("2")||is_start.equals("1")){
-						iv_button_start.setBackgroundResource(R.drawable.iv_stop);
-					}
-				} catch (Exception e) {
-					Log.e(TAG, "没有启动");
-					iv_button_start.setBackgroundResource(R.drawable.iv_button_start);
-				}
-			}
-			if(jsonObject.getString("is_lockdoor").equals("true")){ //锁车状态
-				is_lockdoor = true;
-				iv_lock.setBackgroundResource(R.drawable.button_open_press);
-				iv_lock.setTextColor(Color.RED);
-				iv_open.setBackgroundResource(R.drawable.iv_lock);
-				iv_open.setTextColor(Color.BLACK);
-			}else{	//开锁状态
-				is_lockdoor = false;
-				iv_open.setBackgroundResource(R.drawable.button_lock_press);
-				iv_open.setTextColor(Color.RED);
-				iv_lock.setBackgroundResource(R.drawable.iv_open);
-				iv_lock.setTextColor(Color.BLACK);
-			}
-			sim = jsonObject1.getString("sim");
-			Log.d(TAG, "声光：" + is_sound + ",启动：" + is_start + ",开锁：" +is_lockdoor +",P20:" + accessory);
-			//更新表里的数据
-			String UpdateDB = "update wise_unicom_zwc set accessory = '" + accessory +"',is_sound = '" + is_sound + "',is_start ='" + is_start
-					+ "',is_lockdoor ='" + is_lockdoor + "',sim = '" + sim + "',phone = '" + jsonArray.toString() + "' where serial =" + jsonObject1.getString("serial");
-			DBExcute dbExcute = new DBExcute();
-			dbExcute.UpdateDB(MainActivity.this, UpdateDB);
-			if(!isBlueServer){
-				//是否开启蓝牙服务
-				if(accessory != null&&accessory.equals("20487")){
-					Intent startService = new Intent(MainActivity.this, BluetoothServerService.class);
-					startService(startService);
-				}
-				isBlueServer = true;
-			}			
+    		if(isOffine()){
+    			iv_open.setBackgroundResource(R.drawable.iv_lock);
+    			iv_lock.setBackgroundResource(R.drawable.iv_open);
+    			tv_control_isOnLine.setText("终端状态：离线");
+    			JSONObject jsonObject1 = new JSONObject(str);
+    			try {
+    				accessory = jsonObject1.getString("accessory");
+    			} catch (Exception e) {
+    				accessory = "0";
+    			}
+    			JSONArray jsonArray = jsonObject1.getJSONArray("call_phones");
+    			for(int i = 0 ; i < jsonArray.length() ; i++){
+    				JSONObject jsonObject = jsonArray.getJSONObject(i);
+    				PhoneData phoneData = new PhoneData();
+    				phoneData.setName(jsonObject.getString("name"));
+    				phoneData.setPhone(jsonObject.getString("phone"));
+    				phoneDatas.add(phoneData);
+    			}
+    			sim = jsonObject1.getString("sim");
+    			Log.d(TAG, "声光：" + is_sound + ",启动：" + is_start + ",开锁：" +is_lockdoor +",P20:" + accessory);
+    			//更新表里的数据
+    			String UpdateDB = "update wise_unicom_zwc set accessory = '" + accessory +"',is_sound = '" + is_sound + "',is_start ='" + is_start
+    					+ "',is_lockdoor ='" + is_lockdoor + "',sim = '" + sim + "',phone = '" + jsonArray.toString() + "' where serial =" + jsonObject1.getString("serial");
+    			DBExcute dbExcute = new DBExcute();
+    			dbExcute.UpdateDB(MainActivity.this, UpdateDB);
+    		}else{
+    			tv_control_isOnLine.setText("终端状态：在线");
+    			JSONObject jsonObject1 = new JSONObject(str);
+    			try {
+    				accessory = jsonObject1.getString("accessory");
+    			} catch (Exception e) {
+    				accessory = "0";
+    			}
+    			JSONArray jsonArray = jsonObject1.getJSONArray("call_phones");
+    			for(int i = 0 ; i < jsonArray.length() ; i++){
+    				JSONObject jsonObject = jsonArray.getJSONObject(i);
+    				PhoneData phoneData = new PhoneData();
+    				phoneData.setName(jsonObject.getString("name"));
+    				phoneData.setPhone(jsonObject.getString("phone"));
+    				phoneDatas.add(phoneData);
+    			}
+    			JSONObject jsonObject = jsonObject1.getJSONObject("params");
+    			try {//是否声光
+    				if(jsonObject.getString("is_sound").equals("true")){//显示图标为声光
+    					is_sound = true;					
+    					iv_un_contor.setBackgroundResource(R.drawable.iv_un_contor);
+    					iv_un_contor.setText(R.string.SOUND);
+    				}else{//显示图标为静音
+    					is_sound = false;					
+    					iv_un_contor.setBackgroundResource(R.drawable.iv_sound_false);
+    					iv_un_contor.setText(R.string.SOUND_false);
+    				}						
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}
+    			is_start = jsonObject.getString("is_start");
+    			if(!is_start_now){//是否正在发送启动指令				
+    				try {
+    					if(is_start.equals("0")){
+    						iv_button_start.setBackgroundResource(R.drawable.iv_button_start);
+    					}else if(is_start.equals("2")||is_start.equals("1")){
+    						iv_button_start.setBackgroundResource(R.drawable.iv_stop);
+    					}
+    				} catch (Exception e) {
+    					Log.e(TAG, "没有启动");
+    					iv_button_start.setBackgroundResource(R.drawable.iv_button_start);
+    				}
+    			}
+    			if(jsonObject.getString("is_lockdoor").equals("true")){ //锁车状态
+    				is_lockdoor = true;
+    				iv_lock.setBackgroundResource(R.drawable.button_open_press);
+    				iv_lock.setTextColor(Color.RED);
+    				iv_open.setBackgroundResource(R.drawable.iv_lock);
+    				iv_open.setTextColor(Color.BLACK);
+    			}else{	//开锁状态
+    				is_lockdoor = false;
+    				iv_open.setBackgroundResource(R.drawable.button_lock_press);
+    				iv_open.setTextColor(Color.RED);
+    				iv_lock.setBackgroundResource(R.drawable.iv_open);
+    				iv_lock.setTextColor(Color.BLACK);
+    			}
+    			sim = jsonObject1.getString("sim");
+    			Log.d(TAG, "声光：" + is_sound + ",启动：" + is_start + ",开锁：" +is_lockdoor +",P20:" + accessory);
+    			//更新表里的数据
+    			String UpdateDB = "update wise_unicom_zwc set accessory = '" + accessory +"',is_sound = '" + is_sound + "',is_start ='" + is_start
+    					+ "',is_lockdoor ='" + is_lockdoor + "',sim = '" + sim + "',phone = '" + jsonArray.toString() + "' where serial =" + jsonObject1.getString("serial");
+    			DBExcute dbExcute = new DBExcute();
+    			dbExcute.UpdateDB(MainActivity.this, UpdateDB);
+    			if(!isBlueServer){
+    				//是否开启蓝牙服务
+    				if(accessory != null&&accessory.equals("20487")){
+    					Intent startService = new Intent(MainActivity.this, BluetoothServerService.class);
+    					startService(startService);
+    				}
+    				isBlueServer = true;
+    			}
+    		}						
     	} catch (Exception e) {
 			Log.e(TAG, "获取车辆状态异常");
 		}
@@ -863,7 +912,6 @@ public class MainActivity extends MapActivity{
 	 */
 	private void GetCarInfo(){
 		String url = Config.carDatas.get(index).url + "vehicle/" + Config.obj_id + "/active_gps_data?auth_code=" + Config.Business_auth_code;
-		Log.d(TAG, url);
 		new Thread(new NetThread.GetDataThread(handler, url, REFRESH_CARINFO)).start();
 	}
 	/**
@@ -966,19 +1014,15 @@ public class MainActivity extends MapActivity{
 					if(sim.equals(cursor.getString(1))){//需要拦截的号码
 						String body = cursor.getString(2);
 	                    Toast.makeText(MainActivity.this, body, Toast.LENGTH_SHORT).show();
-	                    if(body.indexOf("锁车成功") >= 0){
+	                    if(body.indexOf("锁车成功") >= 0 || body.indexOf("设防成功") >= 0){
 	                    	Log.d(TAG, "锁车成功");
 	                    	is_lockdoor = true;
-                    		iv_lock.setBackgroundResource(R.drawable.button_open_press);
             				iv_lock.setTextColor(Color.RED);
-            				iv_open.setBackgroundResource(R.drawable.iv_lock);
             				iv_open.setTextColor(Color.BLACK);
-	                    }else if(body.indexOf("解锁成功") >= 0){
+	                    }else if(body.indexOf("解锁成功") >= 0 || body.indexOf("撤防成功") >= 0){
 	                    	Log.d(TAG, "解锁成功");
 	                    	is_lockdoor = false;
-                    		iv_open.setBackgroundResource(R.drawable.button_lock_press);
             				iv_open.setTextColor(Color.RED);
-            				iv_lock.setBackgroundResource(R.drawable.iv_open);
             				iv_lock.setTextColor(Color.BLACK);
 	                    }else if(body.indexOf("启动成功") >= 0){
 	                    	Log.d(TAG, "启动成功");
@@ -1325,13 +1369,18 @@ public class MainActivity extends MapActivity{
     				try {
     					if (Config.carDatas.size()>0) {
     						i++;
-    						GetCmdInfo();//获取最新状态
-    						SendCmd(CMD_P20STATUS,SEND_CMD);//发送刷新指令
-    						if(i == 1){
+    						if(isControl){
+    							Log.d(TAG, "5s刷新");
+    							GetCmdInfo();//获取最新状态
+    							if(i == 1){
+            						SendCmd(CMD_P20STATUS,SEND_CMD);//发送刷新指令
+    							}
+    						}					
+    						if(i == 1 || i == 6){
     							GetCarInfo();
         						GetUnReadMessageNumber();
     						}
-    						if(i == 6){
+    						if(i == 12){
     							i = 0;
     						}
     					}else{
@@ -1485,7 +1534,7 @@ public class MainActivity extends MapActivity{
 		iv_button_start = (ImageView)controlView.findViewById(R.id.iv_button_start);
 		iv_button_start.setOnClickListener(onClickListener);
 		s_car = (Spinner)controlView.findViewById(R.id.s_car);
-		
+		tv_control_isOnLine = (TextView)controlView.findViewById(R.id.tv_control_isOnLine);
 		iv_open = (Button)controlView.findViewById(R.id.iv_open);
 		iv_open.setOnClickListener(onClickListener);
 		iv_lock = (Button)controlView.findViewById(R.id.iv_lock);
@@ -1629,6 +1678,7 @@ public class MainActivity extends MapActivity{
 			Toast.makeText(getApplicationContext(), "车辆处于远程启动状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
 		}
 	}
+	//TODO 离线判断
 	/**
 	 * 设备是否离线
 	 * @return
@@ -1638,7 +1688,8 @@ public class MainActivity extends MapActivity{
 			return true;
 		}
 		long time = GetSystem.GetTimeDiff(carData.getRcv_time());
-		if(time > 10){			
+		System.out.println("time="+time);
+		if(time > 11){	
 			return true;
 		}else{
 			return false;

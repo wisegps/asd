@@ -125,23 +125,22 @@ public class LoginActivity extends Activity{
      * 打开设置网络界面
      * */
     public void setNetworkMethod(){
-    	new AlertDialog.Builder(LoginActivity.this).setTitle("网络设置提示")
-    	.setMessage("网络连接不可用,请检查网络设置,也可进入短信操作模式.")
-    	.setPositiveButton("设置网络", new DialogInterface.OnClickListener() {			
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-				startActivity(intent);
-			}
-		}).setNeutralButton("短信操作", new DialogInterface.OnClickListener() {			
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(getApplicationContext(), OfflineActivity.class);
-				startActivity(intent);
-			}
-		}).setNegativeButton("取消", new DialogInterface.OnClickListener() {			
-			public void onClick(DialogInterface dialog, int which) {
-				finish();
-			}
-		}).show();
+    	new AlertDialog.Builder(LoginActivity.this).setTitle(R.string.no_net_title).setMessage(R.string.no_net_message)
+	    	.setPositiveButton(R.string.no_net_set, new DialogInterface.OnClickListener() {			
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+					startActivity(intent);
+				}
+			}).setNeutralButton(R.string.no_net_sms, new DialogInterface.OnClickListener() {			
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(getApplicationContext(), OfflineActivity.class);
+					startActivity(intent);
+				}
+			}).setNegativeButton(R.string.cancle, new DialogInterface.OnClickListener() {			
+				public void onClick(DialogInterface dialog, int which) {
+					finish();
+				}
+			}).show();
     }
     /**
      * 读取MAC地址
@@ -223,7 +222,7 @@ public class LoginActivity extends Activity{
 				if(jsonObject.opt("auth_code") == null){
 					String status_code = jsonObject.getString("status_code");
 					if(status_code.equals("5")){
-						Toast.makeText(getApplicationContext(), "该账号已绑定其他手机", Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), R.string.account_bind_phone, Toast.LENGTH_LONG).show();
 					}else if(status_code.equals("2") || status_code.equals("1")){
 						Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
 					}else{

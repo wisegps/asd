@@ -67,7 +67,7 @@ public class BluetoothActivity extends Activity{
 				sendBroadcast(sendAddDataIntent);
 				Intent startService = new Intent(BluetoothTools.ACTION_STOP_SERVICE);
 				sendBroadcast(startService);
-				Toast.makeText(getApplicationContext(), "配对模式,关闭连接", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), R.string.pair, Toast.LENGTH_LONG).show();
 				try {
 					bluetoothAdapter.disable();
 				} catch (Exception e) {
@@ -85,10 +85,10 @@ public class BluetoothActivity extends Activity{
 			if (BluetoothTools.ACTION_CONNECT_SUCCESS.equals(action)) {//连接成功	
 				BluetoothAdress = bluetoothAdapter.getAddress().replace(":", "");
 				Log.d(TAG, "连接成功");
-				serverStateTextView.setText("连接成功");
+				serverStateTextView.setText(R.string.connection_ok);
 				bluetoothDatas = new ArrayList<BluetoothData>();
 			} else if(BluetoothTools.ACTION_CONNECT_ERROR.equals(action)){
-				serverStateTextView.setText("连接断开");
+				serverStateTextView.setText(R.string.disconnected);
 				Log.d(TAG, "连接断开");
 			} else if(BluetoothTools.ACTION_GET_DATA.equals(action)){
 				String data  = intent.getStringExtra("data");
@@ -127,10 +127,10 @@ public class BluetoothActivity extends Activity{
 	OnItemClickListener onItemClickListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,long arg3) {
 			new AlertDialog.Builder(BluetoothActivity.this)
-			.setTitle("提示")
-			.setMessage("您确定删除吗？")
-			.setNegativeButton("取消", null)
-			.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+			.setTitle(R.string.Note)
+			.setMessage(R.string.delete_bluethooth)
+			.setNegativeButton(R.string.cancle, null)
+			.setPositiveButton(R.string.Sure,new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int which) {
 					String cmd = "AT+ADD" + bluetoothDatas.get(arg2).getId() + "0";
 					Intent DeleteDataIntent = new Intent(BluetoothTools.ACTION_DATA_TO_SERVICE);
@@ -157,7 +157,7 @@ public class BluetoothActivity extends Activity{
 		et_cmd = (EditText)findViewById(R.id.et_cmd);
 		lv_bluetooth = (ListView)findViewById(R.id.lv_bluetooth);
 		lv_bluetooth.setOnItemClickListener(onItemClickListener);
-		serverStateTextView.setText("等待连接");
+		serverStateTextView.setText(R.string.wait_connection);
 		if(!bluetoothAdapter.isEnabled()){
 			bluetoothAdapter.enable();
 		}		

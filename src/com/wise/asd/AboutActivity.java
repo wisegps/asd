@@ -24,7 +24,7 @@ public class AboutActivity extends Activity{
 		Button bt_about_back = (Button)findViewById(R.id.bt_about_back);
 		bt_about_back.setOnClickListener(Ocl);
 		TextView tv_banben = (TextView)findViewById(R.id.tv_banben);
-		tv_banben.setText("°æ±¾£º" + GetSystem.GetVersion(getApplicationContext(), Config.PackString));
+		tv_banben.setText(getString(R.string.version) + "£º" + GetSystem.GetVersion(getApplicationContext(), Config.PackString));
 	}
 	private OnClickListener Ocl = new OnClickListener() {
 		

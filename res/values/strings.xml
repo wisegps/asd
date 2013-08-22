@@ -1,18 +1,35 @@
 <resources>
     <string name="app_name">爱斯达</string>
     <string name="menu_settings">Settings</string>
-    <string name="tv_check_update">系统检测到有新版本，点击更新</string>
-    <string name="SD_NOTFIND">SD卡不存在</string>
-    <string name="net_wrong">网络连接异常</string>
-	
+    <string name="cancle">取消</string>
+    <string name="Sure">确定</string>
     <string name="image_description">图片</string>
     <string name="Note">提示</string>
+    
+    <!-- 登录界面 -->
+    <string name="tv_check_update">系统检测到有新版本，点击更新</string>
+    <string name="no_net_title">网络设置提示</string>
+    <string name="no_net_message">网络连接不可用,请检查网络设置,也可进入短信操作模式.</string>
+    <string name="no_net_set">设置网络</string>
+    <string name="no_net_sms">短信操作</string>
+    <string name="SD_NOTFIND">SD卡不存在</string>
+    <string name="net_wrong">网络连接异常</string>
+    <string name="account_bind_phone">该账号已绑定其他手机</string>
+	
+    <!-- 蓝牙页面 -->
+    <string name="pair">配对模式,关闭连接</string>
+    <string name="wait_connection">等待连接</string>
+    <string name="connection_ok">连接成功</string>
+    <string name="disconnected">连接断开</string>
+    <string name="delete_bluethooth">您确定删除吗？</string>
+    
+    <!-- 关于页面 -->
+    <string name="version">版本</string>
+    
     <string name="Choose_car">请选择车辆</string>
     <string name="Back">返回</string>
     <string name="Save">保存</string>
     <string name="Add">添加</string>
-    <string name="Sure">确定</string>
-    <string name="cancle">取消</string>
     <string name="verification">验证</string>
 	<string name="not_complete_not">请输入完整信息</string>
 	<string name="get_data">数据读取中</string>

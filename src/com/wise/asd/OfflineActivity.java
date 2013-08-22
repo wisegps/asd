@@ -62,6 +62,8 @@ public class OfflineActivity extends Activity{
 	SendMessageBroadCastReceiver sendMessageBroadCastReceiver;
 	public LocationClient mLocationClient = null;
 	public BDLocationListener myListener = new MyLocationListenner();
+	boolean is_start = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -119,17 +121,6 @@ public class OfflineActivity extends Activity{
 			offlineData.setSim(sim);
 			offlineData.setAccessory(accessory);
 			offlineData.setIs_start(is_start);
-			if(is_sound == null || is_sound.equals("true")){
-				offlineData.is_sound = true;
-			}else{
-				offlineData.is_sound = false;
-			}
-			if(is_lockdoor == null || is_lockdoor.equals("true")){
-				offlineData.is_lockdoor = true;
-			}else{
-				offlineData.is_lockdoor = false;
-				iv_open.setBackgroundResource(R.drawable.button_lock_press);
-			}
 			list.add(offlineData);
 		}
 		cursor.close();
@@ -157,31 +148,6 @@ public class OfflineActivity extends Activity{
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 			index = arg2;
 			offlineData = list.get(arg2);
-			if(offlineData.is_sound){
-				//显示图标为声光
-				iv_un_contor.setBackgroundResource(R.drawable.iv_un_contor);
-				iv_un_contor.setText(R.string.SOUND);
-			}else{
-				//显示图标为静音
-				iv_un_contor.setBackgroundResource(R.drawable.iv_sound_false);
-				iv_un_contor.setText(R.string.SOUND_false);
-			}
-			if(offlineData.is_lockdoor){
-				iv_lock.setBackgroundResource(R.drawable.button_open_press);
-				iv_lock.setTextColor(Color.RED);
-				iv_open.setBackgroundResource(R.drawable.iv_lock);
-				iv_open.setTextColor(Color.BLACK);
-			}else{
-				iv_open.setBackgroundResource(R.drawable.button_lock_press);
-				iv_open.setTextColor(Color.RED);
-				iv_lock.setBackgroundResource(R.drawable.iv_open);
-				iv_lock.setTextColor(Color.BLACK);
-			}
-			if(offlineData.getIs_start() == null || offlineData.getIs_start().equals("0")){
-				iv_button_start.setBackgroundResource(R.drawable.iv_button_start);
-			}else{
-				iv_button_start.setBackgroundResource(R.drawable.iv_stop);
-			}
 			phoneDatas = new ArrayList<PhoneData>();
 			try {
 				JSONArray jsonArray = new JSONArray(offlineData.getPhone());
@@ -195,6 +161,7 @@ public class OfflineActivity extends Activity{
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+			is_start = false;
 		}
 		public void onNothingSelected(AdapterView<?> arg0) {}
 	};
@@ -203,24 +170,20 @@ public class OfflineActivity extends Activity{
 			switch (v.getId()) {
 			case R.id.iv_open:
 				if(offlineData != null){
-					if(offlineData.is_lockdoor){
-						sendMessage(cmd_open);
-					}
+					sendMessage(cmd_open);
 				}				
 				break;
 			case R.id.iv_lock:
 				if(offlineData != null){
-					if(!offlineData.is_lockdoor){
-						sendMessage(cmd_lock);
-					}
+					sendMessage(cmd_lock);
 				}				
 				break;
 			case R.id.iv_button_start:
 				if(offlineData != null){
-					if(offlineData.getIs_start().equals("0")){
-						sendMessage(cmd_start);
-					}else{
+					if(is_start){
 						sendMessage(cmd_stop);
+					}else{
+						sendMessage(cmd_start);
 					}
 				}
 				break;
@@ -339,36 +302,34 @@ public class OfflineActivity extends Activity{
 		                    Toast.makeText(OfflineActivity.this, body, Toast.LENGTH_SHORT).show();
 		                    String UpdateDB = "";	
 		                    System.out.println("body="+body);
-		                    if(body.indexOf("锁车成功") >= 0){
+		                    if(body.indexOf("锁车成功") >= 0 || body.indexOf("设防成功") >= 0){
 		                    	Log.d(TAG, "锁车成功");
 		                    	list.get(i).setIs_lockdoor(true);
 		                    	UpdateDB = "update wise_unicom_zwc set is_lockdoor = 'true' where  serial =" + list.get(i).getSerial();
 		                    	if(index == i){ //需要修改页面状态
-		                    		iv_lock.setBackgroundResource(R.drawable.button_open_press);
 		            				iv_lock.setTextColor(Color.RED);
-		            				iv_open.setBackgroundResource(R.drawable.iv_lock);
 		            				iv_open.setTextColor(Color.BLACK);
 			                    }
-		                    }else if(body.indexOf("解锁成功") >= 0){
+		                    }else if(body.indexOf("解锁成功") >= 0 || body.indexOf("撤防成功") >= 0){
 		                    	Log.d(TAG, "解锁成功");
 		                    	list.get(i).setIs_lockdoor(false);
 		                    	UpdateDB = "update wise_unicom_zwc set is_lockdoor = 'false' where serial =" + list.get(i).getSerial();
 		                    	if(index == i){ //需要修改页面状态
-		                    		iv_open.setBackgroundResource(R.drawable.button_lock_press);
 		            				iv_open.setTextColor(Color.RED);
-		            				iv_lock.setBackgroundResource(R.drawable.iv_open);
 		            				iv_lock.setTextColor(Color.BLACK);
 			                    }
 		                    }else if(body.indexOf("启动成功") >= 0){
 		                    	list.get(i).setIs_start("0");
 		                    	UpdateDB = "update wise_unicom_zwc set is_start = '0' where serial =" + list.get(i).getSerial();
 		                    	if(index == i){ //需要修改页面状态
+		                    		is_start = true;
 		                    		iv_button_start.setBackgroundResource(R.drawable.iv_button_start);
 			                    }
 		                    }else if(body.indexOf("熄火成功") >= 0){
 		                    	list.get(i).setIs_start("2");
 		                    	UpdateDB = "update wise_unicom_zwc set is_start = '2' where serial =" + list.get(i).getSerial();
 		                    	if(index == i){ //需要修改页面状态
+		                    		is_start = false;
 		                    		iv_button_start.setBackgroundResource(R.drawable.iv_stop);
 			                    }
 		                    }

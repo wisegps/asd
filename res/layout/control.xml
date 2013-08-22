@@ -3,14 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
-    android:background="@drawable/bg">
+    android:background="@drawable/bg">    
+    <Spinner 
+        android:id="@+id/s_car"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:visibility="invisible"
+        android:background="@drawable/icon_list"/>          
+    <TextView
+        android:id="@+id/tv_control_isOnLine" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/s_car"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:text="终端状态：在线"/>
     <RelativeLayout 
         android:id="@+id/ll_control_center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/s_car">
+        android:layout_below="@+id/tv_control_isOnLine">
             <Button 
                 android:id="@+id/iv_lock"
                 android:layout_width="140dp"
@@ -68,13 +84,6 @@
 		        android:contentDescription="@string/image_description"
 		        android:background="@drawable/iv_button_start"/>
     </RelativeLayout>
-    <Spinner 
-        android:id="@+id/s_car"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:visibility="invisible"
-        android:background="@drawable/icon_list"/>  
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="wrap_content"
