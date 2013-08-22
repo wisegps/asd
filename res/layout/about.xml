@@ -17,7 +17,7 @@
 	        android:layout_height="36dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="返回"
+            android:text="@string/Back"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:background="@drawable/bt_menu_bg"/>
@@ -28,7 +28,7 @@
             android:layout_toLeftOf="@+id/bt_record_save"
             android:layout_toRightOf="@+id/bt_about_back"
             android:gravity="center"
-            android:text="关于我们 "
+            android:text="@string/about_us"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -37,7 +37,6 @@
             android:layout_width="60dp"
 	        android:layout_height="36dp"
             android:layout_alignParentRight="true"
-            android:text="保存"
             android:textSize="15sp"
             android:visibility="invisible"
             android:textColor="#FFFFFF" />

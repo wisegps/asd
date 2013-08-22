@@ -5,6 +5,15 @@
     <string name="SD_NOTFIND">SD卡不存在</string>
     <string name="net_wrong">网络连接异常</string>
 	
+    <!-- 登录 -->
+    <string name="account_hit">请输入账号</string>
+	<string name="password_hit">请输入密码</string>
+	<string name="login">登录</string>
+	<string name="register">注册</string>
+	<string name="remind_pwd">记住密码</string>
+	<string name="login_error">账号密码不匹配</string>
+	<string name="login_note">登录中</string>
+    
     <string name="image_description">图片</string>
     <string name="Note">提示</string>
     <string name="Choose_car">请选择车辆</string>
@@ -20,15 +29,6 @@
 	<string name="save_ok">数据保存成功</string>
     <string name="password_again_error">2次输入的密码不正确</string>
     
-    <string name="account">账号</string>
-    <string name="account_hit">请输入账号</string>
-	<string name="password">密码</string>
-	<string name="password_hit">请输入密码</string>
-	<string name="login">登录</string>
-	<string name="register">注册</string>
-	<string name="remind_pwd">记住密码</string>
-	<string name="login_error">账号密码不匹配</string>
-	<string name="login_note">登录中</string>
 	
 	<string name="register_title">用户注册</string>
 	<string name="register_account">用户名</string>
@@ -245,10 +245,8 @@
 	<string name="locked_seccess">平台锁车成功</string>
 	<string name="locked_seccess1">平台设防成功</string>
 	<string name="locked_failed">平台锁车失败</string>
-	<string name="locked_failed1">平台设防失败</string>
+	<string name="locked_failed1">平台设防失败</string>	
 	
-	
-	<string name="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></string>
 	<string name="start_success">平台启动成功</string>
 	<string name="start_fail">平台启动失败</string>
 	<string name="close_engine_success">平台熄火成功</string>
@@ -258,7 +256,7 @@
 	<string name="set_Silent_mode_f">设置静音模式失败</string>
 	<string name="set_Acousto_Optic_mode_f">设置声光模式失败</string>
 	<string name="set_Acousto_Optic_mode_s">设置声光模式成功</string>
-	<string name="exit_client">您是否要退出客户端</string>
+	<string name="exit_client">您是否要退出客户端?</string>
 	
 	<string name="close_engine_status">车辆处于熄火状态, 不能进行此操作</string>
 	<string name="start_status">车辆处于启动状态, 不能进行此操作</string>

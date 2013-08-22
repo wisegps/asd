@@ -350,9 +350,8 @@ public class MainActivity extends MapActivity{
 				}
 				break;
 			case SEND_CMD:
-				break;
-				
-		case SMS_OPERATION:
+				break;				
+			case SMS_OPERATION:
 				if(OperationErrorAcount == 3){
 					OperationErrorAcount = 0;
 					new AlertDialog.Builder(MainActivity.this)

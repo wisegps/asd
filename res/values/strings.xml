@@ -1,13 +1,22 @@
 <resources>
-    <string name="app_name">LOVE START</string>
+    <string name="app_name">Asd</string>
     <string name="menu_settings">Settings</string>
-    <string name="tv_check_update">Detects That A New Version,Click The Update</string>
+    <string name="tv_check_update">System detects a new version, click to update</string>
     <string name="SD_NOTFIND">The SD Card Does Not Exist</string>
     <string name="net_wrong">Network Connection Exception</string>
 	
+    <!-- 登录 -->
+    <string name="account_hit">Enter The Account</string>
+	<string name="password_hit">Enter The Password</string>
+	<string name="login">Login</string>
+	<string name="register">Register</string>
+	<string name="remind_pwd">Remember PassWord</string>
+	<string name="login_error">account and password does not match</string>
+	<string name="login_note">Login...</string>
+    
     <string name="image_description">Image</string>
     <string name="Note">Prompt</string>
-    <string name="Choose_car">Please Select A Vehicle</string>
+    <string name="Choose_car">Please select a car</string>
     <string name="Back">Back</string>
     <string name="Save">Save</string>
     <string name="Add">Add</string>
@@ -20,15 +29,6 @@
 	<string name="save_ok">Data Save Successfully</string>
     <string name="password_again_error">Two Passwords Are Not a Same</string>
     
-    <string name="account">Account</string>
-    <string name="account_hit">Enter The Account</string>
-	<string name="password">Password</string>
-	<string name="password_hit">Enter The Password</string>
-	<string name="login">Login</string>
-	<string name="register">Register</string>
-	<string name="remind_pwd">Remember Me</string>
-	<string name="login_error">Account And Password Does Not Match</string>
-	<string name="login_note">In Login</string>
 	
 	<string name="register_title">User Registration</string>
 	<string name="register_account">UserName</string>
@@ -102,7 +102,7 @@
    	<string name="SEND_SOUND_false">Determine the setting silent mode</string>
    	<string name="SEND_SOUND">Are You Sure Set The Acousto-Optic Mode</string>
    	<string name="FINDVEHICLE">Find Car</string>
-   	<string name="SOUND">Acousto-Optic</string>
+   	<string name="SOUND">Sound</string>
    	<string name="SOUND_false">Mute</string>
    	<string name="net_wrong_send_sms">Network Exception,Whether To Use SMS Commands?</string>
    	<string name="car_offline_send_sms">Vehicle offline,Whether To Use SMS Commands?</string>
@@ -114,22 +114,22 @@
     <string name="feedBack">Proposal Feedback</string>
     <string name="about_us">About Us</string>
     
-    <string name="sms_title">The Message List</string>
+    <string name="sms_title">Message</string>
     
     <string name="add_car">New Vehicle</string>
     <string name="delete_car">Deltet Vehicle</string>
     <string name="delete_car_sure">Are You Sure Delete This Vehicle？</string>
     <string name="delete_car_now">The Vehicle In The Delete</string>
     <string name="car_name">License Plate</string>
-    <string name="yearcheck">Yearly Check To Remind</string>
-    <string name="yearcheck_time">Yearly Check Due Date</string>
+    <string name="yearcheck">Annual Inspect Alert</string>
+    <string name="yearcheck_time">Annual Inspect Date</string>
     <string name="insurance">Insurance Remind</string>
     <string name="insurance_time">Insurance Due Date</string>
     <string name="reset">The Mileage For Driving </string>
-    <string name="mileage">Maintenance To Remind</string>
-    <string name="maintenance">Maintenance Mileage</string>
-    <string name="terminal_info">Terminal Information</string>
-    <string name="terminal_enclosure">The Attachment Information</string>
+    <string name="mileage">Maintain Alert</string>
+    <string name="maintenance">Maintain Mileage</string>
+    <string name="terminal_info">Terminal Info</string>
+    <string name="terminal_enclosure">Accessory</string>
     <string name="terminal_lixian">Offline Alarm</string>
     <string name="terminal_sensitivity">Repair Mode</string>
     <string name="call_phones">A Key For Call</string>
@@ -151,7 +151,7 @@
     <string name="Brand">Vehicle Brand</string>
     <string name="is_add_gps">Install GPS Host</string>
     <string name="Barcode">The Barcode For Terminal</string>
-    <string name="SIM">The SIM Number For Terminal</string>
+    <string name="SIM">Terminal SIM</string>
     <string name="next_maintenance">The Next Maintenance Mileage</string>
     <string name="not_Barcode">Terminal Barcode Does Not Exist, Please Input After Verification</string>
     <string name="not_annual_inspect">Enter Annual Inspection Time</string>
@@ -168,16 +168,16 @@
     <string name="person_time">The Annual Inspection Date</string>      
     <string name="person_pwd">Modify Password</string>      
     <string name="person_pwd_hit">Enter The Password</string>      
-    <string name="person_pwd_again">Repeat The Password</string>      
+    <string name="person_pwd_again">Repeat Password</string>      
     <string name="person_pwd_again_hit">Enter The Password Again</string> 
-    <string name="person_binding">Binding Mobile Phone</string> 
+    <string name="person_binding">Bound phone</string> 
     
     <string name="xlistview_header_hint_normal">Drop Down Refresh</string>
     <string name="xlistview_header_hint_ready">Loosen And Refresh Data</string>
     <string name="xlistview_header_hint_loading">In The Load...</string>
     <string name="xlistview_header_last_time">Last Update Time：</string>
-    <string name="xlistview_footer_hint_normal">Look More</string>
-    <string name="xlistview_footer_hint_ready">Loosen And Add In More</string>
+    <string name="xlistview_footer_hint_normal">Load More</string>
+    <string name="xlistview_footer_hint_ready">Loosen Loading more</string>
     
     
     <string name="net_set_prompt">Set Network Prompt</string>
@@ -254,7 +254,7 @@
 	<string name="set_Silent_mode_f">Set The Silent Mode Failed</string>
 	<string name="set_Acousto_Optic_mode_f">Failed To Set The Light Mode</string>
 	<string name="set_Acousto_Optic_mode_s">Successed To Set The Light Mode</string>
-	<string name="exit_client">Do You Want To Quit The Client?</string>
+	<string name="exit_client">Do you want to exit the client?</string>
 	
 	<string name="close_engine_status">The Vehicle Engine In a Stopped State, Can Not Do This</string>
 	<string name="start_status">Vehicles Starting, Can Not Do This</string>
