@@ -122,6 +122,9 @@ public class MainActivity extends MapActivity{
 	private final int GET_AUTH_CODE = 15; //获取业务服务器code
 	private final int OPEN_BOX = 16;		//打开后备箱
 	
+	private final int SMS_OPERATION = 18;  //失败3次进入短信操作模式
+	
+	int OperationErrorAcount = 0 ;
     int notification_id=19172439;
     NotificationManager nm ;
 	
@@ -237,7 +240,7 @@ public class MainActivity extends MapActivity{
 				break;
 			case R.id.iv_control:// 指令页面
 				isControl = true;
-				Toast.makeText(getApplicationContext(), "刷新车辆状态", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),  getString(R.string.refresh_car), Toast.LENGTH_SHORT).show();
 				SendCmd(CMD_P20STATUS,SEND_CMD);//发送刷新指令
 				flipper.setDisplayedChild(0);
 				bg_set(0);				
@@ -343,10 +346,25 @@ public class MainActivity extends MapActivity{
 			case OPEN_BOX:
 				System.out.println(msg.obj.toString());
 				if(msg.obj.toString().indexOf("0")>-1){
-					Toast.makeText(getApplicationContext(), "尾箱开启成功", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(),getString(R.string.open_trunk_successed), Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case SEND_CMD:
+				break;
+				
+		case SMS_OPERATION:
+				if(OperationErrorAcount == 3){
+					OperationErrorAcount = 0;
+					new AlertDialog.Builder(MainActivity.this)
+					.setTitle(getString(R.string.Note))
+					.setMessage(getString(R.string.SMS_operations))
+					.setNegativeButton(getString(R.string.cancle), null)
+					.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int which) {
+							startActivity(new Intent(MainActivity.this,OfflineActivity.class));
+						}
+					}).show();
+				}
 				break;
 			}
 		}    	
@@ -356,10 +374,10 @@ public class MainActivity extends MapActivity{
      */
     private void onOpenBox(){
     	new AlertDialog.Builder(MainActivity.this)
-			.setTitle("提示")
-			.setMessage("是否开启尾箱")
-			.setNegativeButton("取消", null)
-			.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+			.setTitle(getString(R.string.Note))
+			.setMessage(getString(R.string.Whether_open_trunk))
+			.setNegativeButton(getString(R.string.cancle), null)
+			.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int which) {
 					SendCmd(CMD_OPENTRAIL, OPEN_BOX);
 				}
@@ -388,7 +406,7 @@ public class MainActivity extends MapActivity{
     			return;
     		}			
     		if(!is_lockdoor){//是否锁车
-    			Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+    			Toast.makeText(getApplicationContext(), getString(R.string.can_not_excute), Toast.LENGTH_SHORT).show();
     			return;
     		}
     		//是否p20;
@@ -465,7 +483,7 @@ public class MainActivity extends MapActivity{
 						ToastCar(is_start);
 					}
 				}else{//锁车状态发锁车为开锁
-					Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.can_not_excute), Toast.LENGTH_SHORT).show();
 				}
 			}			
 		}else{
@@ -487,7 +505,7 @@ public class MainActivity extends MapActivity{
 				SendSms(R.string.car_offline_send_sms, cmd_lock);
 			}else{
 				if(is_lockdoor){//锁车状态发锁车
-					Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.can_not_excute1), Toast.LENGTH_SHORT).show();
 				}else{
 					if(is_start.equals("0")){
 						if(GetSystem.checkNetWorkStatus(getApplicationContext())){//有网
@@ -528,7 +546,7 @@ public class MainActivity extends MapActivity{
 				}
 			}
 		}else{
-			Toast.makeText(getApplicationContext(), "车辆处于开锁状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.can_not_excute), Toast.LENGTH_SHORT).show();
 		}
     }
     /**
@@ -539,7 +557,7 @@ public class MainActivity extends MapActivity{
     		return;
     	}
 		if(is_lockdoor == true){
-			Toast.makeText(getApplicationContext(), "车辆处于锁车状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.can_not_excute1), Toast.LENGTH_SHORT).show();
 		}else{
 			if(!isOffine()){
 				if(is_start.equals("0")){
@@ -730,7 +748,7 @@ public class MainActivity extends MapActivity{
     		if(isOffine()){
     			iv_open.setBackgroundResource(R.drawable.iv_lock);
     			iv_lock.setBackgroundResource(R.drawable.iv_open);
-    			tv_control_isOnLine.setText("终端状态：离线");
+    			tv_control_isOnLine.setText(getString(R.string.Terminal_status));
     			JSONObject jsonObject1 = new JSONObject(str);
     			try {
     				accessory = jsonObject1.getString("accessory");
@@ -753,7 +771,7 @@ public class MainActivity extends MapActivity{
     			DBExcute dbExcute = new DBExcute();
     			dbExcute.UpdateDB(MainActivity.this, UpdateDB);
     		}else{
-    			tv_control_isOnLine.setText("终端状态：在线");
+    			tv_control_isOnLine.setText(getString(R.string.Terminal_status1));
     			JSONObject jsonObject1 = new JSONObject(str);
     			try {
     				accessory = jsonObject1.getString("accessory");
@@ -1068,7 +1086,8 @@ public class MainActivity extends MapActivity{
 	    				try {
 							if(jsonObject.getString("is_lockdoor").equals("false")){
 								is_lockdoor = false;
-								showNotification(R.drawable.send_ok,"平台开锁成功！","指令提示","平台开锁成功！");
+								showNotification(R.drawable.send_ok,getString(R.string.unlocked_seccess),getString(R.string.Command_prompt),getString(R.string.unlocked_seccess));
+								OperationErrorAcount = 0;
 								if(item == index){
 									//更新指令图片
 									Message message = new Message();
@@ -1085,7 +1104,8 @@ public class MainActivity extends MapActivity{
 	    				//判断设防是否为true
 	    				try {
 							if(jsonObject.getString("is_arming").equals("false")){
-								showNotification(R.drawable.send_ok,"平台撤防成功！","指令提示","平台撤防成功！");
+								showNotification(R.drawable.send_ok,getString(R.string.unlocked_seccess1),getString(R.string.Command_prompt),getString(R.string.unlocked_seccess1));
+								OperationErrorAcount = 0;
 								if(item == index){
 									//更新指令图片
 									Message message = new Message();
@@ -1103,10 +1123,14 @@ public class MainActivity extends MapActivity{
 	    			if(i == 1){
 	    				Log.d(TAG, "open=error");
 	    				if(is_lockdoor_arming){
-	    					showNotification(R.drawable.send_error,"平台开锁失败！","指令提示","平台开锁失败！");
+	    					showNotification(R.drawable.send_error,getString(R.string.unlocked_failed),getString(R.string.Command_prompt),getString(R.string.unlocked_failed));
 	    				}else{
-	    					showNotification(R.drawable.send_error,"平台撤防失败！","指令提示","平台撤防失败！");
+	    					showNotification(R.drawable.send_error,getString(R.string.unlocked_failed1),getString(R.string.Command_prompt),getString(R.string.unlocked_failed1));
 	    				}
+	    				OperationErrorAcount ++;
+	    				Message msgs = new Message();
+	    				msgs.what = SMS_OPERATION;
+	    				handler.sendMessage(msgs);
     				}
 	    			if(item == index){
 						//更新指令图片
@@ -1153,7 +1177,8 @@ public class MainActivity extends MapActivity{
 							if(jsonObject.getString("is_lockdoor").equals("true")){
 								is_lockdoor = true;
 								Log.d(TAG, "is_lockdoor = true");
-								showNotification(R.drawable.send_ok,"平台锁车成功!","指令提示","平台锁车成功!");
+								showNotification(R.drawable.send_ok,getString(R.string.locked_seccess),getString(R.string.Command_prompt),getString(R.string.locked_seccess));
+								OperationErrorAcount = 0;
 								if(item == index){
 									//更新指令图片
 									Message message = new Message();
@@ -1171,7 +1196,8 @@ public class MainActivity extends MapActivity{
 	    				try {
 							if(jsonObject.getString("is_arming").equals("true")){
 								Log.d(TAG, "is_arming = false");
-								showNotification(R.drawable.send_ok,"平台设防成功!","指令提示","平台设防成功!");
+								showNotification(R.drawable.send_ok,getString(R.string.locked_seccess1),getString(R.string.Command_prompt),getString(R.string.locked_seccess1));
+								OperationErrorAcount = 0;
 								if(item == index){
 									//更新指令图片
 									Message message = new Message();
@@ -1188,10 +1214,14 @@ public class MainActivity extends MapActivity{
 	    			if(i == 1){
 	    				Log.d(TAG, "open=error");
 	    				if(is_lock){
-	    					showNotification(R.drawable.send_error,"平台锁车失败!","指令提示","平台锁车失败!");
+	    					showNotification(R.drawable.send_error,getString(R.string.locked_failed),getString(R.string.Command_prompt),getString(R.string.locked_failed));
 	    				}else{
-	    					showNotification(R.drawable.send_error,"平台设防失败!","指令提示","平台设防失败!");
+	    					showNotification(R.drawable.send_error,getString(R.string.locked_failed1),getString(R.string.Command_prompt),getString(R.string.locked_failed1));
 	    				}
+	    				OperationErrorAcount ++;
+	    				Message msgs = new Message();
+	    				msgs.what = SMS_OPERATION;
+	    				handler.sendMessage(msgs);
     				}	
 	    			if(item == index){
 						//更新指令图片
@@ -1237,16 +1267,17 @@ public class MainActivity extends MapActivity{
     					}else{
     						if(is_start.equals(now_is_start)){//启动失败
     							if(is_start.equals("0")){
-    								showNotification(R.drawable.send_error,"平台启动失败!","指令提示","平台启动失败!");
+    								showNotification(R.drawable.send_error,getString(R.string.start_fail),getString(R.string.Command_prompt),getString(R.string.start_fail));
     							}else{
-    								showNotification(R.drawable.send_error,"平台熄火失败!","指令提示","平台熄火失败!");
+    								showNotification(R.drawable.send_error,getString(R.string.close_engine_Failed),getString(R.string.Command_prompt),getString(R.string.close_engine_Failed));
     							}
     						}else{//启动成功
     							if(now_is_start.equals("2")){
-        							showNotification(R.drawable.send_ok,"平台启动成功!","指令提示","平台启动成功!");
+        							showNotification(R.drawable.send_ok,getString(R.string.start_success),getString(R.string.Command_prompt),getString(R.string.start_success));
         						}else if(now_is_start.equals("0")){
-        							showNotification(R.drawable.send_ok,"平台熄火成功!","指令提示","平台熄火成功!");
+        							showNotification(R.drawable.send_ok,getString(R.string.close_engine_success),getString(R.string.Command_prompt),getString(R.string.close_engine_success));
         						}
+    							OperationErrorAcount = 0;
     						}
 							if(item == index){
 								//更新指令图片
@@ -1263,10 +1294,14 @@ public class MainActivity extends MapActivity{
 	    			if(i == 9){
 	    				Log.d(TAG, "open=error");
 	    				if(is_start.equals("0")){
-							showNotification(R.drawable.send_error,"平台启动失败!","指令提示","平台启动失败!");
+							showNotification(R.drawable.send_error,getString(R.string.start_fail),getString(R.string.Command_prompt),getString(R.string.start_fail));
 						}else{
-							showNotification(R.drawable.send_error,"平台熄火失败!","指令提示","平台熄火失败!");
+							showNotification(R.drawable.send_error,getString(R.string.close_engine_Failed),getString(R.string.Command_prompt),getString(R.string.close_engine_Failed));
 						}
+	    				OperationErrorAcount ++;
+	    				Message msgs = new Message();
+	    				msgs.what = SMS_OPERATION;
+	    				handler.sendMessage(msgs);
 	    				if(item == index){
 							Message message = new Message();
 							message.what = SEND_START_OK;
@@ -1319,9 +1354,9 @@ public class MainActivity extends MapActivity{
 						}
 						if(!is_sound_close == is_sound){
 							if(is_sound){
-								showNotification(R.drawable.send_ok,"设置静音模式成功!","指令提示","设置静音模式成功!");
+								showNotification(R.drawable.send_ok,getString(R.string.set_Silent_mode_s),getString(R.string.Command_prompt),getString(R.string.set_Silent_mode_s));
 							}else{
-								showNotification(R.drawable.send_ok,"设置声光模式成功!","指令提示","设置声光模式成功!");
+								showNotification(R.drawable.send_ok,getString(R.string.set_Acousto_Optic_mode_s),getString(R.string.Command_prompt),getString(R.string.set_Acousto_Optic_mode_s));
 							}
 							if(item == index){
 								Message message = new Message();
@@ -1336,9 +1371,9 @@ public class MainActivity extends MapActivity{
 					}
 	    			if(i == 2){
 	    				if(is_sound){
-							showNotification(R.drawable.send_error,"设置静音模式失败!","指令提示","设置静音模式失败!");
+							showNotification(R.drawable.send_error,getString(R.string.set_Silent_mode_f),getString(R.string.Command_prompt),getString(R.string.set_Silent_mode_f));
 						}else{
-							showNotification(R.drawable.send_error,"设置声光模式失败!","指令提示","设置声光模式失败!");
+							showNotification(R.drawable.send_error,getString(R.string.set_Acousto_Optic_mode_f),getString(R.string.Command_prompt),getString(R.string.set_Acousto_Optic_mode_f));
 						}
     				}	
 	    			if(item == index){
@@ -1641,14 +1676,14 @@ public class MainActivity extends MapActivity{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			new AlertDialog.Builder(MainActivity.this)
-				.setTitle("提示")
-				.setMessage("您是否要退出客户端？")
-				.setNegativeButton("取消", null)
-				.setPositiveButton("确定",new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,int which) {
-						finish();
-					}
-				}).show();
+			.setTitle(getString(R.string.Note))
+			.setMessage(getString(R.string.exit_client))
+			.setNegativeButton(getString(R.string.cancle), null)
+			.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int which) {
+					finish();
+				}
+			}).show();
 		}
 		return super.onKeyDown(keyCode, event);
 	}	
@@ -1671,11 +1706,11 @@ public class MainActivity extends MapActivity{
 	 */
 	private void ToastCar(String is_start){
 		if(is_start.equals("0")){
-			Toast.makeText(getApplicationContext(), "车辆处于熄火状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.close_engine_status), Toast.LENGTH_SHORT).show();
 		}else if(is_start.equals("1")){
-			Toast.makeText(getApplicationContext(), "车辆处于启动状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.start_status), Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(getApplicationContext(), "车辆处于远程启动状态, 不能进行此操作", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.remote_start_status), Toast.LENGTH_SHORT).show();
 		}
 	}
 	//TODO 离线判断
@@ -1731,7 +1766,7 @@ public class MainActivity extends MapActivity{
 					Toast.makeText(MainActivity.this, R.string.send_sms, Toast.LENGTH_SHORT).show();
 					break;
 				default:
-					Toast.makeText(MainActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainActivity.this, getString(R.string.send_failed), Toast.LENGTH_SHORT).show();
 					break;
 				}
 			}
@@ -1752,19 +1787,19 @@ public class MainActivity extends MapActivity{
     	if(time<10){//是否在线
     		if(gps_flag%2==0){
         		if(speed > 10){//速度判断
-        			desc = "行驶," + UniStatusDesc + UniAlertsDesc + " " + speed + "公里/小时";
+        			desc = getString(R.string.driving) + UniStatusDesc + UniAlertsDesc + " " + speed + "kilometer/h";
         		}else{
-        			desc = "静止," + UniStatusDesc + UniAlertsDesc;
+        			desc = getString(R.string.statics) + UniStatusDesc + UniAlertsDesc;
         		}
         	}else{
         		if(speed > 10){
-        			desc = "盲区," + UniStatusDesc + UniAlertsDesc;
+        			desc = getString(R.string.Blind_area) + UniStatusDesc + UniAlertsDesc;
         		}else{
-        			desc = "静止," + UniStatusDesc + UniAlertsDesc;
+        			desc = getString(R.string.statics) + UniStatusDesc + UniAlertsDesc;
         		}
         	}
     	}else{
-    		desc = "离线" + GetSystem.ShowOfflineTime(time);
+    		desc = getString(R.string.Offline) + GetSystem.ShowOfflineTime(time);
     	}
     	if(desc.endsWith(",")){//格式化结果
     		desc = desc.substring(0, desc.length()-1);
@@ -1781,13 +1816,13 @@ public class MainActivity extends MapActivity{
     		try {
     			String jsonString = jsonArray.getString(i);
     			if(jsonString.equals(STATUS_FORTIFY)){
-    				str += "设防,";
+    				str += getString(R.string.contor)+",";
     			}else if(jsonString.equals(STATUS_LOCK)){
-    				str += "锁车,";
+    				str += getString(R.string.LOCK)+",";
     			}else if(jsonString.equals(STATUS_FORTIFY)){
-    				str += "基站定位,";
+    				str += getString(R.string.location) + ",";
     			}else if(jsonString.equals(STATUS_FORTIFY)){
-    				str += "省电状态,";
+    				str += getString(R.string.low_power)+",";
     			}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1816,33 +1851,33 @@ public class MainActivity extends MapActivity{
     		try {
     			String jsonString = jsonArray.getString(i);
     			if(jsonString.equals(ALERT_SOS)){
-    				str += "紧急报警,";
+    				str += getString(R.string.emergency_wraning)+",";
     			}else if(jsonString.equals(ALERT_OVERSPEED)){
-    				str += "超速报警,";
+    				str += getString(R.string.The_speed_limit_wraning)+",";
     			}else if(jsonString.equals(ALERT_VIRBRATE)){
-    				str += "震动报警,";
+    				str += getString(R.string.vibration_wraning)+",";
     			}else if(jsonString.equals(ALERT_MOVE)){
-    				str += "位移报警,";
+    				str += getString(R.string.The_displacement_wraning)+",";
     			}else if(jsonString.equals(ALERT_ALARM)){
-    				str += "防盗器报警,";
+    				str += getString(R.string.Guard_against_theft_wraning)+",";
     			}else if(jsonString.equals(ALERT_INVALIDRUN)){
-    				str += "非法行驶报警,";
+    				str += getString(R.string.Illegal_driving_wraning)+",";
     			}else if(jsonString.equals(ALERT_ENTERGEO)){
-    				str += "进围栏报警,";
+    				str += getString(R.string.Into_the_fence_wraning)+",";
     			}else if(jsonString.equals(ALERT_EXITGEO)){
-    				str += "出围栏报警,";
+    				str += getString(R.string.Out_of_the_fence_wraning)+",";
     			}else if(jsonString.equals(ALERT_CUTPOWER)){
-    				str += "剪线报警,";
+    				str += getString(R.string.cut_line_wraning)+",";
     			}else if(jsonString.equals(ALERT_LOWPOWER)){
-    				str += "低电压报警,";
+    				str += getString(R.string.Low_voltage_wraning)+",";
     			}else if(jsonString.equals(ALERT_GPSCUT)){
-    				str += "GPS断线报警,";
+    				str += getString(R.string.Gps_break_wraning) + ",";
     			}else if(jsonString.equals(ALERT_OVERDRIVE)){
-    				str += "疲劳驾驶报警,";
+    				str += getString(R.string.Fatigue_driving_wraning) + ",";
     			}else if(jsonString.equals(ALERT_INVALIDACC)){
-    				str += "非法点火报警,";
+    				str += getString(R.string.illegal_start_engine_wraning)+",";
     			}else if(jsonString.equals(ALERT_INVALIDDOOR)){
-    				str += "非法开门报警,";
+    				str += getString(R.string.illegal_open_door_wraning)+",";
     			}
 			} catch (Exception e) {
 				e.printStackTrace();

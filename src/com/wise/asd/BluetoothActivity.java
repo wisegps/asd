@@ -67,7 +67,7 @@ public class BluetoothActivity extends Activity{
 				sendBroadcast(sendAddDataIntent);
 				Intent startService = new Intent(BluetoothTools.ACTION_STOP_SERVICE);
 				sendBroadcast(startService);
-				Toast.makeText(getApplicationContext(), R.string.pair, Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), R.string.p_m, Toast.LENGTH_LONG).show();
 				try {
 					bluetoothAdapter.disable();
 				} catch (Exception e) {
@@ -85,10 +85,10 @@ public class BluetoothActivity extends Activity{
 			if (BluetoothTools.ACTION_CONNECT_SUCCESS.equals(action)) {//连接成功	
 				BluetoothAdress = bluetoothAdapter.getAddress().replace(":", "");
 				Log.d(TAG, "连接成功");
-				serverStateTextView.setText(R.string.connection_ok);
+				serverStateTextView.setText(R.string.connection_seccess);
 				bluetoothDatas = new ArrayList<BluetoothData>();
 			} else if(BluetoothTools.ACTION_CONNECT_ERROR.equals(action)){
-				serverStateTextView.setText(R.string.disconnected);
+				serverStateTextView.setText(R.string.Connection_broken);
 				Log.d(TAG, "连接断开");
 			} else if(BluetoothTools.ACTION_GET_DATA.equals(action)){
 				String data  = intent.getStringExtra("data");
@@ -128,7 +128,7 @@ public class BluetoothActivity extends Activity{
 		public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,long arg3) {
 			new AlertDialog.Builder(BluetoothActivity.this)
 			.setTitle(R.string.Note)
-			.setMessage(R.string.delete_bluethooth)
+			.setMessage(R.string.sure_delete)
 			.setNegativeButton(R.string.cancle, null)
 			.setPositiveButton(R.string.Sure,new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int which) {

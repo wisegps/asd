@@ -118,10 +118,10 @@ public class PersonActivity extends Activity{
 				Log.d(TAG, "MAC="+msg.toString());
 				if(isBangDingMac){
 					isMac = true;
-					Toast.makeText(getApplicationContext(), "绑定手机成功", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.Binding_mobile_phone_success), Toast.LENGTH_SHORT).show();
 				}else{
 					isMac = false;
-					Toast.makeText(getApplicationContext(), "取消绑定成功", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.Cancel_the_binding_success), Toast.LENGTH_SHORT).show();
 				}
 				break;
 			}
@@ -339,7 +339,8 @@ public class PersonActivity extends Activity{
 
         // month
         int curMonth = calendar.get(Calendar.MONTH);
-        String months[] = new String[] {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
+        String months[] = new String[] {getString(R.string.january), getString(R.string.february),getString(R.string.march),getString(R.string.april), getString(R.string.may), 
+        		getString(R.string.june), getString(R.string.july),getString(R.string.august), getString(R.string.september), getString(R.string.october), getString(R.string.november), getString(R.string.december)};
         month.setViewAdapter(new DateArrayAdapter(this, months, curMonth));
         month.setCurrentItem(curMonth);
     
@@ -352,15 +353,15 @@ public class PersonActivity extends Activity{
         day.setCurrentItem(calendar.get(Calendar.DAY_OF_MONTH) - 1);
 		
 		AlertDialog.Builder addHoldBuilder = new AlertDialog.Builder(PersonActivity.this);
-		addHoldBuilder.setTitle("请输入日期");
+		addHoldBuilder.setTitle(getString(R.string.input_data));
 		addHoldBuilder.setView(v);
-		addHoldBuilder.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+		addHoldBuilder.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				String trueTime = (curYear +year.getCurrentItem()) + "-" + GetSystem.ChangeTime(month.getCurrentItem()+1) + "-" + GetSystem.ChangeTime(day.getCurrentItem()+1);
 				et_person_yearcheck.setText(trueTime);
 			}
 		});
-		addHoldBuilder.setNegativeButton("取消",null);
+		addHoldBuilder.setNegativeButton(getString(R.string.cancle),null);
 		addHoldBuilder.show();
 	}
 	

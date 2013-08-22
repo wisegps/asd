@@ -1,5 +1,7 @@
 package com.wise.bluetoothUtil;
 
+import com.wise.asd.R;
+
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothSocket;
@@ -50,7 +52,7 @@ public class BluetoothServerService extends Service {
 				    	isBlueToothOn = true;
 				    	//打开蓝牙，开启后台连接线程
 				    	Intent openIntent = new Intent(BluetoothTools.ACTION_GET_DATA);
-				    	openIntent.putExtra("data", "蓝牙打开,开始侦听。。");
+				    	openIntent.putExtra("data", getString(R.string.blue_open));
 						sendBroadcast(openIntent);
 						new BluetoothServerConnThread(serviceHandler).start();	
 				        break;
@@ -59,7 +61,7 @@ public class BluetoothServerService extends Service {
 				        break;
 				    case BluetoothAdapter.STATE_OFF://蓝牙关闭
 				    	Intent closeIntent = new Intent(BluetoothTools.ACTION_GET_DATA);
-				    	closeIntent.putExtra("data", "蓝牙关闭");
+				    	closeIntent.putExtra("data", getString(R.string.blue_closed));
 						sendBroadcast(closeIntent);
 						if (communThread != null) {
 							communThread.isRun = false;
@@ -98,7 +100,7 @@ public class BluetoothServerService extends Service {
 				if(isBlueToothOn){//蓝牙没有关闭，说明是距离过远断开连接，重新开始侦听
 					new BluetoothServerConnThread(serviceHandler).start();
 					Intent openIntent = new Intent(BluetoothTools.ACTION_GET_DATA);
-					openIntent.putExtra("data", "连接断开，重新开始侦听");
+					openIntent.putExtra("data", getString(R.string.blue_connect_borken));
 					sendBroadcast(openIntent);
 				}
 				break;				
@@ -148,7 +150,7 @@ public class BluetoothServerService extends Service {
 			}else{
 				Log.d(TAG, "isConn = false");
 				Intent getIntent = new Intent(BluetoothTools.ACTION_GET_DATA);
-	            getIntent.putExtra("data", "连接断开");
+	            getIntent.putExtra("data", getString(R.string.Connection_broken));
 				sendBroadcast(getIntent);
 			}
 		}

@@ -194,17 +194,17 @@ public class CarActivity extends Activity{
 						}
 						Toast.makeText(getApplicationContext(), R.string.save_ok, Toast.LENGTH_SHORT).show();
 					}else{
-						Toast.makeText(getApplicationContext(), "数据保存失败", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.save_data_fail), Toast.LENGTH_SHORT).show();
 					}
 				} catch (Exception e) {
-					Toast.makeText(getApplicationContext(), "数据保存失败", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.save_data_fail), Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case cmd_repair_close:
 				try {
 					JSONObject jsonObject = new JSONObject(msg.obj.toString());
 					if(jsonObject.getString("status_code").equals("0")){
-						Toast.makeText(getApplicationContext(), "修车模式关", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.close_repair_mode), Toast.LENGTH_SHORT).show();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -214,7 +214,7 @@ public class CarActivity extends Activity{
 				try {
 					JSONObject jsonObject = new JSONObject(msg.obj.toString());
 					if(jsonObject.getString("status_code").equals("0")){
-						Toast.makeText(getApplicationContext(), "修车模式开", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.open_repair_mode), Toast.LENGTH_SHORT).show();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -597,15 +597,15 @@ public class CarActivity extends Activity{
 			}else{
 				accessory = jsonObject.getString("accessory");
 				if (accessory.equals(ACCESSORY_FUEL)) {
-					tv_terminal_other.setText("油耗传感器");
+					tv_terminal_other.setText(getString(R.string.Fuel_consumption_sensor));
 				}else if (accessory.equals(ACCESSORY_ODB)) {
-					tv_terminal_other.setText("ODB附件");
+					tv_terminal_other.setText(getString(R.string.ODB_attachment));
 				}else if (accessory.equals(ACCESSORY_ENGINE)) {
-					tv_terminal_other.setText("远程启动附件");
+					tv_terminal_other.setText(getString(R.string.remote_start));
 				}else if(accessory.equals(ACCESSORY_PKE)){
-					tv_terminal_other.setText("带PKE的远程启动附件");
+					tv_terminal_other.setText(getString(R.string.remote_start_PKE));
 				}else if (accessory.equals(ACCESSORY_LOCKBOX)) {
-					tv_terminal_other.setText("防拆盒");
+					tv_terminal_other.setText(getString(R.string.The_Box_For_Prevent_Disassembly));
 				}
 			}
 			//服务到期日期
@@ -764,9 +764,9 @@ public class CarActivity extends Activity{
 			}else{//主号
 				tr_deputy.setVisibility(View.VISIBLE);
 				if(op_mobile2.equals("")){
-					bt_car_info_deputy.setText("设置");
+					bt_car_info_deputy.setText(getString(R.string.set_up));
 				}else{//清除副号
-					bt_car_info_deputy.setText("清空");
+					bt_car_info_deputy.setText(getString(R.string.clear));
 					et_car_info_deputy.setText(op_mobile2);
 				}
 			}
@@ -805,10 +805,10 @@ public class CarActivity extends Activity{
 			addPhoneBuilder.show();
 		}else{
 			new AlertDialog.Builder(CarActivity.this)
-			.setTitle("提示")
-			.setMessage("是否清空副号")
-			.setNegativeButton("取消", null)
-			.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+			.setTitle(getString(R.string.Note))
+			.setMessage(getString(R.string.clear_Deputy))
+			.setNegativeButton(getString(R.string.cancle), null)
+			.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int which) {
 					//发送清空副号指令
 					SendCmd(COMMAND_SLAVE, DELETE_COMMAND,"{sim: \"\"}");
@@ -843,14 +843,14 @@ public class CarActivity extends Activity{
 						JSONObject jsonObject2 = jsonObject.getJSONObject("params");
 						int sensitivity = Integer.valueOf(jsonObject2.getString("sensitivity"));
 						if(sensitivity == mySensitivity){
-							showNotification(R.drawable.send_ok,"设置震动灵敏度成功","指令提示","设置震动灵敏度成功");
+							showNotification(R.drawable.send_ok,getString(R.string.set_shock_success),getString(R.string.Command_prompt),getString(R.string.set_shock_success));
 							break;
 						}
 					} catch (Exception e) {}
 	    			//循环
 	    			if(i == 2){
 	    				Log.d(TAG, "open=error");
-	    				showNotification(R.drawable.send_error,"设置震动灵敏度失败","指令提示","设置震动灵敏度失败");
+	    				showNotification(R.drawable.send_error,getString(R.string.set_shock_failed),getString(R.string.Command_prompt),getString(R.string.set_shock_failed));
     				}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -890,9 +890,9 @@ public class CarActivity extends Activity{
 						}
 						if(is_sound_close == is_AUTOLOCK){
 							if(is_AUTOLOCK){
-								showNotification(R.drawable.send_ok,"打开行车自动落锁成功!","指令提示","打开行车自动落锁成功!");
+								showNotification(R.drawable.send_ok,getString(R.string.open_AUTOLOCK_success),getString(R.string.Command_prompt),getString(R.string.open_AUTOLOCK_success));
 							}else{
-								showNotification(R.drawable.send_ok,"关闭行车自动落锁成功!","指令提示","关闭行车自动落锁成功!");
+								showNotification(R.drawable.send_ok,getString(R.string.close_AUTOLOCK_success),getString(R.string.Command_prompt),getString(R.string.close_AUTOLOCK_success));
 							}
 							break;
 						}
@@ -901,9 +901,9 @@ public class CarActivity extends Activity{
 					}
 	    			if(i == 2){
 	    				if(is_AUTOLOCK){
-							showNotification(R.drawable.send_ok,"打开行车自动落锁失败!","指令提示","打开行车自动落锁失败!");
+							showNotification(R.drawable.send_ok,getString(R.string.open_AUTOLOCK_failed),getString(R.string.Command_prompt),getString(R.string.open_AUTOLOCK_failed));
 						}else{
-							showNotification(R.drawable.send_ok,"关闭行车自动落锁失败!","指令提示","关闭行车自动落锁失败!");
+							showNotification(R.drawable.send_ok,getString(R.string.close_AUTOLOCK_failed),getString(R.string.Command_prompt),getString(R.string.close_AUTOLOCK_failed));
 						}
     				}
 				} catch (Exception e) {
@@ -1040,7 +1040,8 @@ public class CarActivity extends Activity{
         final WheelView day = (WheelView) v.findViewById(R.id.data_day);
         // month
         int curMonth = calendar.get(Calendar.MONTH);
-        String months[] = new String[] {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
+        String months[] = new String[] {getString(R.string.january), getString(R.string.february),getString(R.string.march),getString(R.string.april), getString(R.string.may), 
+        		getString(R.string.june), getString(R.string.july),getString(R.string.august), getString(R.string.september), getString(R.string.october), getString(R.string.november), getString(R.string.december)};
         month.setViewAdapter(new DateArrayAdapter(this, months, curMonth));
         month.setCurrentItem(curMonth);    
         // year
@@ -1051,15 +1052,15 @@ public class CarActivity extends Activity{
         day.setCurrentItem(calendar.get(Calendar.DAY_OF_MONTH) - 1);
 		
 		AlertDialog.Builder addHoldBuilder = new AlertDialog.Builder(CarActivity.this);
-		addHoldBuilder.setTitle("请输入日期");
+		addHoldBuilder.setTitle(getString(R.string.input_data));
 		addHoldBuilder.setView(v);
-		addHoldBuilder.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+		addHoldBuilder.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				String trueTime = (curYear +year.getCurrentItem()) + "-" + GetSystem.ChangeTime(month.getCurrentItem()+1) + "-" + GetSystem.ChangeTime(day.getCurrentItem()+1);
 				GetDateTime(where,trueTime);
 			}
 		});
-		addHoldBuilder.setNegativeButton("取消",null);
+		addHoldBuilder.setNegativeButton(getString(R.string.cancle),null);
 		addHoldBuilder.show();
 	}
     private void GetDateTime(int which,String Time){

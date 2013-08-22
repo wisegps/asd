@@ -47,7 +47,7 @@ public class FeedbcakActivity extends Activity{
 				content = et_feedback_content.getText().toString();
 				phone = et_feedback_phone.getText().toString();
 				if(content.equals("")||phone.equals("")){
-					Toast.makeText(FeedbcakActivity.this, "请填写完整", Toast.LENGTH_LONG).show();
+					Toast.makeText(FeedbcakActivity.this, getString(R.string.enter_complete), Toast.LENGTH_LONG).show();
 				}else{
 					//new Thread(new myThread()).start();
 					//Dialog = ProgressDialog.show(FeedbcakActivity.this,"提示","意见反馈中...",true);
@@ -83,11 +83,11 @@ public class FeedbcakActivity extends Activity{
 			}
 			switch (msg.what) {
 			case 0:
-				Toast.makeText(FeedbcakActivity.this, "意见反馈失败", Toast.LENGTH_LONG).show();
+				Toast.makeText(FeedbcakActivity.this, getString(R.string.feedBack_failed), Toast.LENGTH_LONG).show();
 				break;
 
 			case 1:
-				Toast.makeText(FeedbcakActivity.this, "意见反馈成功", Toast.LENGTH_LONG).show();
+				Toast.makeText(FeedbcakActivity.this, getString(R.string.feedBack_success), Toast.LENGTH_LONG).show();
 				break;
 			}
 		}

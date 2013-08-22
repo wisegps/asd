@@ -310,7 +310,8 @@ public class AddCarActivity extends Activity{
 
         // month
         int curMonth = calendar.get(Calendar.MONTH);
-        String months[] = new String[] {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
+        String months[] = new String[] {getString(R.string.january), getString(R.string.february),getString(R.string.march),getString(R.string.april), getString(R.string.may), 
+        		getString(R.string.june), getString(R.string.july),getString(R.string.august), getString(R.string.september), getString(R.string.october), getString(R.string.november), getString(R.string.december)};
         month.setViewAdapter(new DateArrayAdapter(this, months, curMonth));
         month.setCurrentItem(curMonth);
     
@@ -323,15 +324,15 @@ public class AddCarActivity extends Activity{
         day.setCurrentItem(calendar.get(Calendar.DAY_OF_MONTH) - 1);
 		
 		AlertDialog.Builder addHoldBuilder = new AlertDialog.Builder(AddCarActivity.this);
-		addHoldBuilder.setTitle("请输入日期");
+		addHoldBuilder.setTitle(getString(R.string.input_data));
 		addHoldBuilder.setView(v);
-		addHoldBuilder.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+		addHoldBuilder.setPositiveButton(getString(R.string.Sure),new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				String trueTime = (curYear +year.getCurrentItem()) + "-" + GetSystem.ChangeTime(month.getCurrentItem()+1) + "-" + GetSystem.ChangeTime(day.getCurrentItem()+1);
 				GetDateTime(where,trueTime);
 			}
 		});
-		addHoldBuilder.setNegativeButton("取消",null);
+		addHoldBuilder.setNegativeButton(getString(R.string.cancle),null);
 		addHoldBuilder.show();
 	}
 	private void GetDateTime(int which,String Time){

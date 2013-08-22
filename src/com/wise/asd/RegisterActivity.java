@@ -161,7 +161,7 @@ public class RegisterActivity extends Activity{
 					Dialog.dismiss();					
 				}
 				if(msg.obj.toString().equals("")){
-					Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(),  getString(R.string.Registration_failed), Toast.LENGTH_SHORT).show();
 				}else{
 					Toast.makeText(getApplicationContext(), R.string.register_ok, Toast.LENGTH_SHORT).show();
 					

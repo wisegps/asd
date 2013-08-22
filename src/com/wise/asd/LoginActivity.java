@@ -125,13 +125,13 @@ public class LoginActivity extends Activity{
      * 打开设置网络界面
      * */
     public void setNetworkMethod(){
-    	new AlertDialog.Builder(LoginActivity.this).setTitle(R.string.no_net_title).setMessage(R.string.no_net_message)
-	    	.setPositiveButton(R.string.no_net_set, new DialogInterface.OnClickListener() {			
+    	new AlertDialog.Builder(LoginActivity.this).setTitle(R.string.net_set_prompt).setMessage(R.string.net_set_content)
+	    	.setPositiveButton(R.string.set_net, new DialogInterface.OnClickListener() {			
 				public void onClick(DialogInterface dialog, int which) {
 					Intent intent = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
 					startActivity(intent);
 				}
-			}).setNeutralButton(R.string.no_net_sms, new DialogInterface.OnClickListener() {			
+			}).setNeutralButton(R.string.SMS_operation, new DialogInterface.OnClickListener() {			
 				public void onClick(DialogInterface dialog, int which) {
 					Intent intent = new Intent(getApplicationContext(), OfflineActivity.class);
 					startActivity(intent);
@@ -222,7 +222,7 @@ public class LoginActivity extends Activity{
 				if(jsonObject.opt("auth_code") == null){
 					String status_code = jsonObject.getString("status_code");
 					if(status_code.equals("5")){
-						Toast.makeText(getApplicationContext(), R.string.account_bind_phone, Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), R.string.account_binding, Toast.LENGTH_LONG).show();
 					}else if(status_code.equals("2") || status_code.equals("1")){
 						Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
 					}else{

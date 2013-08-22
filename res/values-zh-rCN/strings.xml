@@ -1,0 +1,300 @@
+<resources>
+    <string name="app_name">爱斯达</string>
+    <string name="menu_settings">Settings</string>
+    <string name="tv_check_update">系统检测到有新版本，点击更新</string>
+    <string name="SD_NOTFIND">SD卡不存在</string>
+    <string name="net_wrong">网络连接异常</string>
+	
+    <string name="image_description">图片</string>
+    <string name="Note">提示</string>
+    <string name="Choose_car">请选择车辆</string>
+    <string name="Back">返回</string>
+    <string name="Save">保存</string>
+    <string name="Add">添加</string>
+    <string name="Sure">确定</string>
+    <string name="cancle">取消</string>
+    <string name="verification">验证</string>
+	<string name="not_complete_not">请输入完整信息</string>
+	<string name="get_data">数据读取中</string>
+	<string name="save_data">数据保存中</string>
+	<string name="save_ok">数据保存成功</string>
+    <string name="password_again_error">2次输入的密码不正确</string>
+    
+    <string name="account">账号</string>
+    <string name="account_hit">请输入账号</string>
+	<string name="password">密码</string>
+	<string name="password_hit">请输入密码</string>
+	<string name="login">登录</string>
+	<string name="register">注册</string>
+	<string name="remind_pwd">记住密码</string>
+	<string name="login_error">账号密码不匹配</string>
+	<string name="login_note">登录中</string>
+	
+	<string name="register_title">用户注册</string>
+	<string name="register_account">用户名</string>
+	<string name="register_account_hint">请输入用户名</string>
+	<string name="register_password">密码</string>
+	<string name="register_password_hint">请输入密码</string>
+	<string name="register_password_again">重复密码</string>
+	<string name="register_password_again_hint">请再次输入密码</string>
+	<string name="register_person">联系人</string>
+	<string name="register_person_hint">请输入联系人名称</string>
+	<string name="register_mail">邮箱</string>
+	<string name="register_mail_hint">请输入邮箱地址</string>
+	<string name="register_phone">手机号码</string>
+	<string name="register_phone_hint">请输入手机号码</string>
+	<string name="account_used">账号已使用,请重新输入</string>
+	<string name="registering">账号注册中,请稍后</string>
+	<string name="register_ok">账号注册成功</string>
+	
+	<string name="Traffic">地图</string>
+    <string name="Satellite">卫星</string>
+    <string name="search_hit">请输入车牌号</string>
+    <string name="Get_car_data">车辆数据获取中</string>
+    
+    <string name="car_speed">速度</string>
+    <string name="car_mileage">里程</string>
+    <string name="car_Direction">方向</string>
+    
+    <string name="accon">启动</string>
+    <string-array name="alarm">
+   		<item>剪线报警</item>
+   		<item>GPS断线报警</item>
+   		<item>超速报警</item>
+   		<item>低电压报警</item>
+   		<item>超时停车报警</item>
+   		<item>Sensor 1 On</item>
+   		<item>Sensor 2 On</item>
+   		<item>Sensor 3 On</item>
+   		<item>锁车状态</item>
+   	</string-array>
+   	<string-array name="phone_list">
+   	    <item>修改号码</item>
+   	    <item>删除号码</item>
+   	</string-array>
+   	<string name="delete_phone">你确定删除该联系方式</string>
+   	
+   	<string name="open">开锁</string>
+   	<string name="lock">关锁</string>
+   	<string name="contor">设防</string>
+   	<string name="un_contor">撤防</string>
+   	<string name="one_Diagnosis">开启尾箱</string>
+   	<string name="one_call">一键呼叫</string>
+   	<string name="one_location">位置分享</string>
+   	<string name="enter_phone">发送车辆位置</string>
+   	<string name="enter_phone_hit">请输入对方的手机号码</string>
+   	<string name="no_car_location">没有找到车辆的位置</string>
+   	<string name="no_call_phone">没有设置一键呼叫号码</string>
+   	<string name="app_no">功能暂未开放</string>
+   	<string name="choose_phone">点击拨打电话</string>
+   	<string name="send_sms">短信已发送</string>
+   	<string name="add_p20">请安装P20套件以实现该功能</string>
+   	<string name="car_offine">设备离线</string>
+   	
+   	<string name="DISARMING">撤防</string>
+   	<string name="ARMING">设防</string>
+   	<string name="LOCK">锁车</string>
+   	<string name="UNLOCK">解锁</string>
+   	<string name="STARTENGINE">远程启动</string>
+   	<string name="STARTENGINE_false">远程熄火</string>
+   	<string name="start_engine">您确定远程启动?</string>
+   	<string name="stop_engine">您确定远程熄火?</string>
+   	<string name="SEND_SOUND_false">你确定设置静音模式</string>
+   	<string name="SEND_SOUND">你确定设置声光模式</string>
+   	<string name="FINDVEHICLE">寻车</string>
+   	<string name="SOUND">声光</string>
+   	<string name="SOUND_false">静音</string>
+   	<string name="net_wrong_send_sms">网络异常,是否使用短信发送指令</string>
+   	<string name="car_offline_send_sms">车辆离线,是否使用短信发送指令</string>
+    
+    <string name="more">更多</string>
+    <string name="sms">消息提醒</string>
+    <string name="car_info">车辆管理</string>
+    <string name="person_info">我的账号</string>
+    <string name="feedBack">意见反馈</string>
+    <string name="about_us">关于我们</string>
+    
+    <string name="sms_title">消息列表</string>
+    
+    <string name="add_car">新增车辆</string>
+    <string name="delete_car">删除车辆</string>
+    <string name="delete_car_sure">您确定删除当前车辆吗？</string>
+    <string name="delete_car_now">车辆删除中</string>
+    <string name="car_name">车牌号码</string>
+    <string name="yearcheck">年检提醒</string>
+    <string name="yearcheck_time">年检到期日</string>
+    <string name="insurance">保险提醒</string>
+    <string name="insurance_time">保险到期日</string>
+    <string name="reset">行驶里程</string>
+    <string name="mileage">保养提醒</string>
+    <string name="maintenance">保养里程</string>
+    <string name="terminal_info">终端信息</string>
+    <string name="terminal_enclosure">附件信息</string>
+    <string name="terminal_lixian">离线报警</string>
+    <string name="terminal_sensitivity">修车模式</string>
+    <string name="call_phones">一键呼叫</string>
+    <string name="call_phones_set">设置一键呼叫号码</string>
+    <string name="call_name">名称</string>
+    <string name="call_name_hint">请输入号码标识</string>
+    <string name="call_phone">电话号码</string>
+    <string name="call_phone_hint">请输入联系的电话号码</string>
+    <string name="autolock">行车自动落锁</string>
+    <string name="bluetooth">PKE管理</string>
+    <string name="blue">PKE组件</string>
+    <string name="add_phone">新增</string>
+    <string name="delete_phone_bluetooth">删除手机</string>
+    <string name="deputy">副号</string>
+    <string name="set_up">设置</string>
+    <string name="enter_deputy_phone">请输入副号</string>
+    <string name="service_end">服务到期日期</string>
+    
+    <string name="Brand">车辆品牌</string>
+    <string name="is_add_gps">安装GPS主机</string>
+    <string name="Barcode">终端条码</string>
+    <string name="SIM">终端SIM卡号</string>
+    <string name="next_maintenance">下次保养里程</string>
+    <string name="not_Barcode">终端条码不存在,请验证后输入</string>
+    <string name="not_annual_inspect">请输入年检时间</string>
+    <string name="not_insurance">请输入保险时间</string>
+    <string name="not_mileage">请输入保养里程</string>
+    <string name="not_car_id">请输入车牌号码</string>
+    <string name="not_gpsinfo">请输入完整的GPS信息</string>
+    <string name="gps_registered">终端已注册，请重新输入</string>
+    
+    <string name="person_sup">上级用户</string>    
+    <string name="person_name">用户名称</string>    
+    <string name="person_phone">联系电话</string>    
+    <string name="person_yearcheck">驾驶年检提醒</string>    
+    <string name="person_time">年检日期</string>      
+    <string name="person_pwd">密码修改</string>      
+    <string name="person_pwd_hit">请输入新密码</string>      
+    <string name="person_pwd_again">重复密码</string>      
+    <string name="person_pwd_again_hit">请再次输入新密码</string> 
+    <string name="person_binding">绑定手机</string> 
+    
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    
+    
+    
+    
+    <string name="net_set_prompt">网络设置提示</string>
+    <string name="net_set_content">网络连接不可用,请检查网络设置,也可进入短信操作模式.</string>
+    <string name="set_net">网络设置</string>
+    <string name="SMS_operation">短信操作</string>
+    <string name="account_binding">该账号已绑定其他手机</string>
+    <string name="version">版本</string>
+    
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
+    
+    
+    <string name="input_data">请输入日期</string>
+    <string name="p_m">配对模式，关闭连接</string>
+    <string name="connection_seccess">连接成功</string>
+    <string name="Connection_broken">连接断开</string>
+    <string name="sure_delete">确定删除？</string>
+    <string name="wait_connection">等待连接</string>
+    <string name="save_data_fail">数据保存失败</string>
+    <string name="close_repair_mode">修车模式关</string>
+    <string name="open_repair_mode">修车模式开</string>
+    <string name="Fuel_consumption_sensor">油耗传感器</string>
+	<string name="ODB_attachment">ODB附件</string>
+	<string name="remote_start">远程启动附件</string>
+	<string name="remote_start_PKE">带PKE的远程启动附件</string>
+	<string name="The_Box_For_Prevent_Disassembly">防拆盒</string>
+	<string name="clear">清空</string>
+	<string name="clear_Deputy">是否清空副号?</string>
+	<string name="set_shock_success">设置震动灵敏度成功</string>
+	<string name="set_shock_failed">设置震动灵敏度失败</string>
+	<string name="open_AUTOLOCK_success">打开行车自动落锁成功</string>
+	<string name="open_AUTOLOCK_failed">打开行车自动落锁失败</string>
+	<string name="close_AUTOLOCK_success">关闭行车自动落锁成功</string>
+	<string name="close_AUTOLOCK_failed">关闭行车自动落锁失败</string>
+	<string name="Command_prompt">指令提示</string>
+	<string name="enter_complete">请填写完整</string>
+	<string name="feedBack_failed">意见反馈失败</string>
+	<string name="feedBack_success">意见反馈成功</string>
+	<string name="refresh_car">刷新车辆状态</string>
+	<string name="open_trunk_successed">开启尾箱成功</string>
+	<string name="Whether_open_trunk">是否开启尾箱</string>
+	<string name="can_not_excute">车辆处于开锁状态，不能执行此操作</string>
+	<string name="can_not_excute1">车辆处于锁车状态，不能执行此操作</string>
+	<string name="Terminal_status">终端状态:离线</string>
+	<string name="Terminal_status1">终端状态:在线</string>
+	<string name="unlocked_seccess">平台开锁成功</string>
+	<string name="unlocked_seccess1">平台撤防成功</string>
+	<string name="unlocked_failed">平台开锁失败</string>
+	<string name="unlocked_failed1">平台撤防失败</string>
+	
+	
+	<string name="locked_seccess">平台锁车成功</string>
+	<string name="locked_seccess1">平台设防成功</string>
+	<string name="locked_failed">平台锁车失败</string>
+	<string name="locked_failed1">平台设防失败</string>
+	
+	
+	<string name="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></string>
+	<string name="start_success">平台启动成功</string>
+	<string name="start_fail">平台启动失败</string>
+	<string name="close_engine_success">平台熄火成功</string>
+	<string name="close_engine_Failed">平台熄火失败</string>
+	
+	<string name="set_Silent_mode_s">设置静音模式成功</string>
+	<string name="set_Silent_mode_f">设置静音模式失败</string>
+	<string name="set_Acousto_Optic_mode_f">设置声光模式失败</string>
+	<string name="set_Acousto_Optic_mode_s">设置声光模式成功</string>
+	<string name="exit_client">您是否要退出客户端</string>
+	
+	<string name="close_engine_status">车辆处于熄火状态, 不能进行此操作</string>
+	<string name="start_status">车辆处于启动状态, 不能进行此操作</string>
+	<string name="remote_start_status">车辆处于远程启动状态, 不能进行此操作</string>
+	
+	<string name="send_failed">发送失败</string>
+	<string name="driving">行驶，</string>
+	<string name="statics">静止，</string>
+	<string name="Blind_area">盲区，</string>
+	<string name="Offline">离线</string>
+	<string name="location">基站定位</string>
+	<string name="low_power">省点状态</string>
+	<string name="emergency_wraning">紧急报警</string>
+	<string name="The_speed_limit_wraning">紧急报警</string>
+	<string name="vibration_wraning">震动报警</string>
+	<string name="The_displacement_wraning">位移报警</string>
+	<string name="Guard_against_theft_wraning">防盗器报警</string>
+	<string name="Illegal_driving_wraning">非法行驶报警</string>
+	<string name="Into_the_fence_wraning">进围栏报警</string>
+	<string name="Out_of_the_fence_wraning">出围栏报警</string>
+	<string name="cut_line_wraning">剪线报警</string>
+	<string name="Low_voltage_wraning">低电压报警</string>
+	<string name="Gps_break_wraning">GPS断线报警</string>
+	<string name="Fatigue_driving_wraning">疲劳驾驶报警</string>
+	<string name="illegal_start_engine_wraning">非法点火报警</string>
+	<string name="illegal_open_door_wraning">非法开门报警</string>
+	<string name="Binding_mobile_phone_success">绑定手机成功</string>
+	<string name="Cancel_the_binding_success">取消绑定成功</string>
+	<string name="Registration_failed">注册失败</string>
+	<string name="SMS_operations">是否使用短信操作？</string>
+	<string name="download">下载</string>
+	
+	<string name="update_soft">软件更新</string>
+	<string name="later">以后再说</string>
+	
+	<string name="blue_open">蓝牙打开，开始侦听</string>
+	<string name="blue_closed">蓝牙关闭</string>
+	<string name="blue_connect_borken">连接断开，重新开始侦听</string>
+</resources>
