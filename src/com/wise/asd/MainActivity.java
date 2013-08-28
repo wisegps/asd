@@ -1643,7 +1643,7 @@ public class MainActivity extends MapActivity{
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Dialog = ProgressDialog.show(MainActivity.this,getString(R.string.Note),getString(R.string.Get_car_data),true);
 		//读取车辆列表
-		String url = Config.URL + "customer/mobile/" + Config.account + "/vehicle?auth_code=" + Config.auth_code + "&business_type=1";
+		String url = Config.URL + "customer/mobile/" + Config.account + "/vehicle?auth_code=" + Config.auth_code + "&business_type=1&page_no=1&page_count=100";
 		new Thread(new NetThread.GetDataThread(handler, url, GET_CARINFO)).start();
         Log.d(TAG, url);
 		//注册定位事件

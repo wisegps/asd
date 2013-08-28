@@ -1,4 +1,5 @@
 <resources>
+    <string name="zh">0</string>
     <string name="app_name">爱斯达</string>
     <string name="menu_settings">Settings</string>
     <string name="tv_check_update">系统检测到有新版本，点击更新</string>
@@ -160,8 +161,7 @@
     <string name="not_car_id">请输入车牌号码</string>
     <string name="not_gpsinfo">请输入完整的GPS信息</string>
     <string name="gps_registered">终端已注册，请重新输入</string>
-    
-    <string name="person_sup">上级用户</string>    
+       
     <string name="person_name">用户名称</string>    
     <string name="person_phone">联系电话</string>    
     <string name="person_yearcheck">驾驶年检提醒</string>    
@@ -295,4 +295,8 @@
 	<string name="blue_open">蓝牙打开，开始侦听</string>
 	<string name="blue_closed">蓝牙关闭</string>
 	<string name="blue_connect_borken">连接断开，重新开始侦听</string>
+	
+	<string name="sms_10010">消息来源：10010</string>
+	<string name="sms_device">消息来源：终端消息</string>
+	<string name="sms_app">消息来源：平台消息</string>
 </resources>

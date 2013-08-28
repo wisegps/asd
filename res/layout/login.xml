@@ -37,7 +37,7 @@
 	            android:layout_marginBottom="10dp"
 	            android:paddingLeft="10dp"
 	            android:textColor="#000000"
-	            android:textSize="18sp"
+	            android:textSize="16sp"
 	            android:hint="@string/account_hit"
 	            android:background="@android:color/transparent"/>
 			<TextView 
@@ -52,7 +52,7 @@
 	            android:layout_marginBottom="10dp"
 	            android:paddingLeft="10dp"
 	            android:textColor="#000000"
-	            android:textSize="18sp"
+	            android:textSize="16sp"
 	            android:hint="@string/password_hit"
 	            android:inputType="textPassword"
 	            android:background="@android:color/transparent"/>
@@ -70,7 +70,7 @@
 		        android:layout_weight="1"
 		        android:background="@drawable/bt_background"
 		        android:textColor="#000000"
-		        android:textSize="18sp"
+		        android:textSize="16sp"
 		        android:text="@string/login"/>
 	        <Button 
 		        android:id="@+id/bt_register"
@@ -80,7 +80,7 @@
 		        android:layout_weight="1"
 		        android:background="@drawable/bt_background"
 		        android:textColor="#000000"
-		        android:textSize="18sp"
+		        android:textSize="16sp"
 		        android:visibility="gone"
 		        android:text="@string/register"/>
 	    </LinearLayout>
@@ -90,6 +90,7 @@
 			android:layout_height="wrap_content"
 			android:paddingLeft="35dp"
 			android:checked="true"
+			android:textSize="16sp"
 			android:text="@string/remind_pwd"
 			android:button="@drawable/selector_checkbox"
 			android:textColor="#FFFFFF"/>

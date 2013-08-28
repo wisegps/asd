@@ -69,6 +69,7 @@ public class SmsActivity extends Activity implements IXListViewListener{
 			super.dispatchMessage(msg);
 			switch (msg.what) {
 			case GET_SMS:
+				Log.d(TAG, msg.obj.toString());
 				if(Dialog!=null){
 					Dialog.dismiss();
 				}
@@ -85,6 +86,11 @@ public class SmsActivity extends Activity implements IXListViewListener{
 		        		smsData.setMsg_type(jsonObject.getString("msg_type"));
 		        		smsData.setNoti_id(jsonObject.getString("noti_id"));
 		        		smsData.setRcv_time(GetSystem.ChangeTime(jsonObject.getString("rcv_time"),0));
+		        		if(jsonObject.opt("content_en") != null){
+		        			smsData.setContent_en(jsonObject.getString("content_en"));
+		        		}else{
+		        			smsData.setContent_en(jsonObject.getString(""));
+		        		}
 		        		smsDataList.add(smsData);
 		        	}
 		        	newAdapter = new NewAdapter(SmsActivity.this, smsDataList);
@@ -106,6 +112,11 @@ public class SmsActivity extends Activity implements IXListViewListener{
 		        		smsData.setMsg_type(jsonObject.getString("msg_type"));
 		        		smsData.setNoti_id(jsonObject.getString("noti_id"));
 		        		smsData.setRcv_time(GetSystem.ChangeTime(jsonObject.getString("rcv_time"),0));
+		        		if(jsonObject.opt("content_en") != null){
+		        			smsData.setContent_en(jsonObject.getString("content_en"));
+		        		}else{
+		        			smsData.setContent_en(jsonObject.getString(""));
+		        		}
 		        		smsDataList.add(smsData);
 		        	}
 					newAdapter.notifyDataSetChanged();
@@ -126,6 +137,11 @@ public class SmsActivity extends Activity implements IXListViewListener{
 		        		smsData.setMsg_type(jsonObject.getString("msg_type"));
 		        		smsData.setNoti_id(jsonObject.getString("noti_id"));
 		        		smsData.setRcv_time(GetSystem.ChangeTime(jsonObject.getString("rcv_time"),0));
+		        		if(jsonObject.opt("content_en") != null){
+		        			smsData.setContent_en(jsonObject.getString("content_en"));
+		        		}else{
+		        			smsData.setContent_en(jsonObject.getString(""));
+		        		}
 		        		smsDataList.add(i, smsData);
 		        		Log.d(TAG, smsData.toString());
 		        	}

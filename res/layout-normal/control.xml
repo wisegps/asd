@@ -33,7 +33,7 @@
                 android:gravity="center_horizontal|bottom"
                 android:paddingBottom="40dp"
                 android:paddingRight="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#6a6a6a"
                 android:background="@drawable/iv_open"/>
             <Button 
@@ -44,7 +44,7 @@
                 android:gravity="center_horizontal|bottom"
                 android:paddingBottom="40dp"
                 android:paddingLeft="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#6a6a6a"
                 android:layout_toRightOf="@+id/iv_lock"
                 android:background="@drawable/iv_lock"/>
@@ -56,7 +56,7 @@
                 android:gravity="center_horizontal|bottom"
                 android:paddingBottom="40dp"
                 android:paddingRight="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#6a6a6a"
                 android:layout_below="@+id/iv_open"
                 android:background="@drawable/iv_contor"/>
@@ -68,7 +68,7 @@
                 android:gravity="center_horizontal|bottom"
                 android:paddingBottom="40dp"
                 android:paddingLeft="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#6a6a6a"
                 android:layout_toRightOf="@+id/iv_contor"
                 android:layout_below="@+id/iv_lock"
@@ -97,6 +97,7 @@
             android:paddingBottom="5dp"
             android:drawableTop="@drawable/icon_hos"
             android:layout_weight="1"
+            android:textSize="14sp"
             android:textColor="#6a6a6a"
             android:background="@drawable/bt_bottom_bg_left"
             android:text="@string/one_Diagnosis"/>
@@ -111,6 +112,7 @@
             android:paddingBottom="5dp"
             android:drawableTop="@drawable/icon_call"
             android:layout_weight="1"
+            android:textSize="14sp"
             android:textColor="#6a6a6a"
             android:background="@drawable/bt_bottom_bg_center"
             android:text="@string/one_call"/>
@@ -125,6 +127,7 @@
             android:paddingBottom="5dp"
             android:drawableTop="@drawable/icon_location"
             android:layout_weight="1"
+            android:textSize="14sp"
             android:textColor="#6a6a6a"
             android:background="@drawable/bt_bottom_bg_right"
             android:text="@string/one_location"/>

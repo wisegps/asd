@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wise.asd.R;
 
+import android.R.raw;
 import android.content.Context;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
@@ -46,7 +47,11 @@ public class NewAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tv_new_content.setText(smsDatas.get(position).getContent());
+		if(mContext.getString(R.string.zh).equals("0")){
+			holder.tv_new_content.setText(smsDatas.get(position).getContent());
+		}else{
+			holder.tv_new_content.setText(smsDatas.get(position).getContent_en());
+		}
 		holder.tv_new_time.setText(smsDatas.get(position).getRcv_time());
 		
 		TextPaint tp = holder.tv_new_content.getPaint();
@@ -63,11 +68,11 @@ public class NewAdapter extends BaseAdapter{
 		
 		String Type = smsDatas.get(position).getMsg_type();
 		if(Type.equals("1")){
-			holder.tv_new_Regnum.setText("消息来源：10010");
+			holder.tv_new_Regnum.setText(R.string.sms_10010);
 		}else if (Type.equals("2")) {
-			holder.tv_new_Regnum.setText("消息来源：终端消息");
+			holder.tv_new_Regnum.setText(R.string.sms_device);
 		}else{
-			holder.tv_new_Regnum.setText("消息来源：平台消息");
+			holder.tv_new_Regnum.setText(R.string.sms_app);
 		}
 		return convertView;
 	}

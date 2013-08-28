@@ -1,293 +1,295 @@
 <resources>
-    <string name="app_name">Asd</string>
+    <string name="zh">1</string>
+    <string name="app_name">START</string>
     <string name="menu_settings">Settings</string>
-    <string name="tv_check_update">System detects a new version, click to update</string>
-    <string name="SD_NOTFIND">The SD Card Does Not Exist</string>
-    <string name="net_wrong">Network Connection Exception</string>
+    <string name="tv_check_update">New version is available, click to update.</string>
+    <string name="SD_NOTFIND">SD does not exist</string>
+    <string name="net_wrong">Your connection have issue.</string>
 	
-    <!-- 登录 -->
-    <string name="account_hit">Enter The Account</string>
-	<string name="password_hit">Enter The Password</string>
-	<string name="login">Login</string>
-	<string name="register">Register</string>
-	<string name="remind_pwd">Remember PassWord</string>
-	<string name="login_error">account and password does not match</string>
-	<string name="login_note">Login...</string>
-    
     <string name="image_description">Image</string>
-    <string name="Note">Prompt</string>
-    <string name="Choose_car">Please select a car</string>
+    <string name="Note">Info</string>
+    <string name="Choose_car">Please select one vehicle</string>
     <string name="Back">Back</string>
     <string name="Save">Save</string>
     <string name="Add">Add</string>
-    <string name="Sure">Sure</string>
+    <string name="Sure">Ok</string>
     <string name="cancle">Cancle</string>
-    <string name="verification">Verification</string>
-	<string name="not_complete_not">Please Enter Complete Information</string>
-	<string name="get_data">In Data Read</string>
-	<string name="save_data">Data Preservation</string>
-	<string name="save_ok">Data Save Successfully</string>
-    <string name="password_again_error">Two Passwords Are Not a Same</string>
+    <string name="verification">Verifying</string>
+	<string name="not_complete_not">Information is not complete.</string>
+	<string name="get_data">Loading data...</string>
+	<string name="save_data">Saving data...</string>
+	<string name="save_ok">Data saved.</string>
+    <string name="password_again_error">Password confirm is not correct.</string>
     
+    <string name="account">Account</string>
+    <string name="account_hit">Please input account</string>
+	<string name="password">Password</string>
+	<string name="password_hit">Please input password</string>
+	<string name="login">Sign in</string>
+	<string name="register">Sign up</string>
+	<string name="remind_pwd">Remember Me</string>
+	<string name="login_error">Account or password is not correct.</string>
+	<string name="login_note">Signing in</string>
 	
-	<string name="register_title">User Registration</string>
-	<string name="register_account">UserName</string>
-	<string name="register_account_hint">Enter The UserName</string>
+	<string name="register_title">Sign up</string>
+	<string name="register_account">Account</string>
+	<string name="register_account_hint">Please input account</string>
 	<string name="register_password">Password</string>
-	<string name="register_password_hint">Enter The Password</string>
-	<string name="register_password_again">Check The Password</string>
-	<string name="register_password_again_hint">Ehter The Password Again</string>
-	<string name="register_person">Contact People</string>
-	<string name="register_person_hint">Enter The Contact People Name</string>
+	<string name="register_password_hint">Please input password</string>
+	<string name="register_password_again">Password confirm</string>
+	<string name="register_password_again_hint">Please input password again</string>
+	<string name="register_person">Contact</string>
+	<string name="register_person_hint">Please input contact name</string>
 	<string name="register_mail">Email</string>
-	<string name="register_mail_hint">Enter The Email</string>
-	<string name="register_phone">Tel</string>
-	<string name="register_phone_hint">Enter The Tel</string>
-	<string name="account_used">Account Has Been Uesd,Try Again</string>
-	<string name="registering">In Registration,Plase Wait...</string>
-	<string name="register_ok">Successful Registration</string>
+	<string name="register_mail_hint">Please input email</string>
+	<string name="register_phone">Mobile</string>
+	<string name="register_phone_hint">Please input mobile</string>
+	<string name="account_used">Account is not exists, please input another.</string>
+	<string name="registering">Signing up, please wait...</string>
+	<string name="register_ok">Sign up succeed.</string>
 	
 	<string name="Traffic">Map</string>
-    <string name="Satellite">Satellite</string>
-    <string name="search_hit">Enter The License Plate Number</string>
-    <string name="Get_car_data">Retrieving Vehicle Data</string>
+    <string name="Satellite">Satllite</string>
+    <string name="search_hit">Please input vehicle plate</string>
+    <string name="Get_car_data">Loading data...</string>
     
     <string name="car_speed">Speed</string>
-    <string name="car_mileage">Mileage</string>
-    <string name="car_Direction">Direction</string>
+    <string name="car_mileage">Odometer</string>
+    <string name="car_Direction">Course</string>
     
-    <string name="accon">Start</string>
+    <string name="accon">Acc On</string>
     <string-array name="alarm">
-   		<item>Cut The Wire Alarm</item>
-   		<item>GPS Unavailable Alarm</item>
-   		<item>Speeding Alarm</item>
-   		<item>Low Voltage Alarm</item>
-   		<item>Overtime Parking Alarm</item>
+   		<item>Power Cut</item>
+   		<item>GPS Cut</item>
+   		<item>Over Speed</item>
+   		<item>Low Power</item>
+   		<item>Over parking</item>
    		<item>Sensor 1 On</item>
    		<item>Sensor 2 On</item>
    		<item>Sensor 3 On</item>
-   		<item>Car Lock Status</item>
+   		<item>Lock</item>
    	</string-array>
    	<string-array name="phone_list">
-   	    <item>Modify Tel</item>
-   	    <item>Delete Tel</item>
+   	    <item>Edit</item>
+   	    <item>Remove</item>
    	</string-array>
-   	<string name="delete_phone">Are you sure to delete the contact details?</string>
+   	<string name="delete_phone">Confirm to delete the number?</string>
    	
-   	<string name="open">Unlock</string>
-   	<string name="lock">Locked</string>
-   	<string name="contor">Guard Against</string>
-   	<string name="un_contor">Remove Guard Against</string>
-   	<string name="one_Diagnosis">Open The Trunk</string>
-   	<string name="one_call">A Key For Call</string>
-   	<string name="one_location">Share My Location</string>
-   	<string name="enter_phone">Commit Vehicle Position</string>
-   	<string name="enter_phone_hit">Enter Other Side Tel</string>
-   	<string name="no_car_location">Vehicle Location Can Not Be Found</string>
-   	<string name="no_call_phone">A Key For Call Can Not Be Set</string>
-   	<string name="app_no">Function Temporarily Not Opened</string>
-   	<string name="choose_phone">Chick And Call</string>
-   	<string name="send_sms">Message Has Been Send</string>
-   	<string name="add_p20">Install P20-Suite Implements</string>
-   	<string name="car_offine">Device Offline</string>
+   	<string name="open">Lock</string>
+   	<string name="lock">Unlock</string>
+   	<string name="contor">Arm</string>
+   	<string name="un_contor">Disarm</string>
+   	<string name="one_Diagnosis">Open Trunk</string>
+   	<string name="one_call">Touch Call</string>
+   	<string name="one_location">Share Loc</string>
+   	<string name="enter_phone">Share Vehicle Location</string>
+   	<string name="enter_phone_hit">Please input receive number</string>
+   	<string name="no_car_location">Cannot get vehicle location</string>
+   	<string name="no_call_phone">No touch call number.</string>
+   	<string name="app_no">Under Construction</string>
+   	<string name="choose_phone">Click to call</string>
+   	<string name="send_sms">SMS has been sent.</string>
+   	<string name="add_p20">Please install remote control accessory.</string>
+   	<string name="car_offine">Device is offline</string>
    	
-   	<string name="DISARMING">Remove Guard Against</string>
-   	<string name="ARMING">Guard Against</string>
-   	<string name="LOCK">Lock Car</string>
+   	<string name="DISARMING">Disarm</string>
+   	<string name="ARMING">Arm</string>
+   	<string name="LOCK">Lock</string>
    	<string name="UNLOCK">Unlock</string>
-   	<string name="STARTENGINE">Remote Start</string>
-   	<string name="STARTENGINE_false">Remote Flameout</string>
-   	<string name="start_engine">Are You Sure Remote Start?</string>
-   	<string name="stop_engine">Are You Sure Remote Flameout?</string>
-   	<string name="SEND_SOUND_false">Determine the setting silent mode</string>
-   	<string name="SEND_SOUND">Are You Sure Set The Acousto-Optic Mode</string>
-   	<string name="FINDVEHICLE">Find Car</string>
+   	<string name="STARTENGINE">START</string>
+   	<string name="STARTENGINE_false">STOP</string>
+   	<string name="start_engine">Confirm to start engine?</string>
+   	<string name="stop_engine">Confirm to stop engine?</string>
+   	<string name="SEND_SOUND_false">Confirm to set sound mode?</string>
+   	<string name="SEND_SOUND">Confirm to set silent mode?</string>
+   	<string name="FINDVEHICLE">Search</string>
    	<string name="SOUND">Sound</string>
-   	<string name="SOUND_false">Mute</string>
-   	<string name="net_wrong_send_sms">Network Exception,Whether To Use SMS Commands?</string>
-   	<string name="car_offline_send_sms">Vehicle offline,Whether To Use SMS Commands?</string>
+   	<string name="SOUND_false">Silent</string>
+   	<string name="net_wrong_send_sms">Network anomaly, if you want to use sms to send commad?</string>
+   	<string name="car_offline_send_sms">Device is offline, if you want to use sms to send commad?</string>
     
     <string name="more">More</string>
-    <string name="sms">Message Reminding</string>
-    <string name="car_info">Vehicle Manager</string>
-    <string name="person_info">My Account</string>
-    <string name="feedBack">Proposal Feedback</string>
-    <string name="about_us">About Us</string>
+    <string name="sms">Message</string>
+    <string name="car_info">Vehicle</string>
+    <string name="person_info">Account</string>
+    <string name="feedBack">Feedback</string>
+    <string name="about_us">About</string>
     
     <string name="sms_title">Message</string>
     
-    <string name="add_car">New Vehicle</string>
-    <string name="delete_car">Deltet Vehicle</string>
-    <string name="delete_car_sure">Are You Sure Delete This Vehicle？</string>
-    <string name="delete_car_now">The Vehicle In The Delete</string>
-    <string name="car_name">License Plate</string>
-    <string name="yearcheck">Annual Inspect Alert</string>
-    <string name="yearcheck_time">Annual Inspect Date</string>
-    <string name="insurance">Insurance Remind</string>
-    <string name="insurance_time">Insurance Due Date</string>
-    <string name="reset">The Mileage For Driving </string>
-    <string name="mileage">Maintain Alert</string>
-    <string name="maintenance">Maintain Mileage</string>
-    <string name="terminal_info">Terminal Info</string>
+    <string name="add_car">Add Vehicle</string>
+    <string name="delete_car">Remove Vehicle</string>
+    <string name="delete_car_sure">Confirm to remove the vehicle?</string>
+    <string name="delete_car_now">Vehicle removing...</string>
+    <string name="car_name">Plate Number</string>
+    <string name="yearcheck">Annual Inspection</string>
+    <string name="yearcheck_time">Inspection Date</string>
+    <string name="insurance">Insurance</string>
+    <string name="insurance_time">Insurance Date</string>
+    <string name="reset">Odometer</string>
+    <string name="mileage">Maintain</string>
+    <string name="maintenance">Maintain Odometer</string>
+    <string name="terminal_info">Device Type</string>
     <string name="terminal_enclosure">Accessory</string>
-    <string name="terminal_lixian">Offline Alarm</string>
+    <string name="terminal_lixian">Offline Alert</string>
     <string name="terminal_sensitivity">Repair Mode</string>
-    <string name="call_phones">A Key For Call</string>
-    <string name="call_phones_set">Set A Key For Call</string>
+    <string name="call_phones">Touch Call</string>
+    <string name="call_phones_set">Set number</string>
     <string name="call_name">Name</string>
-    <string name="call_name_hint">Enter The Tel Logo</string>
-    <string name="call_phone">Tel</string>
-    <string name="call_phone_hint">Enter The Contact People Tel</string>
-    <string name="autolock">AUTOLOCK</string>
-    <string name="bluetooth">PKE Manage</string>
-    <string name="blue">PKE Component</string>
-    <string name="add_phone">Insert</string>
-    <string name="delete_phone_bluetooth">Delete Tel</string>
-    <string name="deputy">Deputy Tel</string>
-    <string name="set_up">Setting</string>
-    <string name="enter_deputy_phone">Enter The Deputy Tel</string>
-    <string name="service_end">Service Maturity</string>
+    <string name="call_name_hint">Please input name for phone number</string>
+    <string name="call_phone">Phone</string>
+    <string name="call_phone_hint">Please input phone name</string>
+    <string name="autolock">Auto Lock</string>
+    <string name="bluetooth">PKE Setting</string>
+    <string name="blue">PKE</string>
+    <string name="add_phone">Add</string>
+    <string name="delete_phone_bluetooth">Remove Mobile</string>
+    <string name="deputy">Assist Number</string>
+    <string name="set_up">Set</string>
+    <string name="enter_deputy_phone">Please input assist number</string>
+    <string name="service_end">Due Date</string>
     
-    <string name="Brand">Vehicle Brand</string>
-    <string name="is_add_gps">Install GPS Host</string>
-    <string name="Barcode">The Barcode For Terminal</string>
-    <string name="SIM">Terminal SIM</string>
-    <string name="next_maintenance">The Next Maintenance Mileage</string>
-    <string name="not_Barcode">Terminal Barcode Does Not Exist, Please Input After Verification</string>
-    <string name="not_annual_inspect">Enter Annual Inspection Time</string>
-    <string name="not_insurance">Enter Insurance Time</string>
-    <string name="not_mileage">Enter Maintenance Mile</string>
-    <string name="not_car_id">Enter License Plate</string>
-    <string name="not_gpsinfo">Enter The Complete GPS Information</string>
-    <string name="gps_registered">Terminal Has Been Registered, Please Enter Again</string>
+    <string name="Brand">Brand</string>
+    <string name="is_add_gps">Install GPS device</string>
+    <string name="Barcode">Serial</string>
+    <string name="SIM">SIM</string>
+    <string name="next_maintenance">Next Maintain Odometer</string>
+    <string name="not_Barcode">Serial is not exists, please check.</string>
+    <string name="not_annual_inspect">Please input annual inspection date</string>
+    <string name="not_insurance">Please input insurance date</string>
+    <string name="not_mileage">Please input Maintain odometer</string>
+    <string name="not_car_id">Please input plate number</string>
+    <string name="not_gpsinfo">Please input complete information</string>
+    <string name="gps_registered">Device has been registered, please input another device.</string>
     
-    <string name="person_sup">The Higher The User</string>    
-    <string name="person_name">UserName</string>    
-    <string name="person_phone">Contact Tel</string>    
-    <string name="person_yearcheck">Driving a Yearly Check To Remind</string>    
-    <string name="person_time">The Annual Inspection Date</string>      
-    <string name="person_pwd">Modify Password</string>      
-    <string name="person_pwd_hit">Enter The Password</string>      
-    <string name="person_pwd_again">Repeat Password</string>      
-    <string name="person_pwd_again_hit">Enter The Password Again</string> 
-    <string name="person_binding">Bound phone</string> 
+    <string name="person_name">Customer Name</string>
+    <string name="person_phone">Contact Phone</string>
+    <string name="person_yearcheck">License Inspect</string>
+    <string name="person_time">Inspect Date</string>
+    <string name="person_pwd">New Password</string>
+    <string name="person_pwd_hit">input new password</string>
+    <string name="person_pwd_again">Password Confirm</string>
+    <string name="person_pwd_again_hit">Input new password again</string>
+    <string name="person_binding">Bind Mobile Phone</string>
     
-    <string name="xlistview_header_hint_normal">Drop Down Refresh</string>
-    <string name="xlistview_header_hint_ready">Loosen And Refresh Data</string>
-    <string name="xlistview_header_hint_loading">In The Load...</string>
-    <string name="xlistview_header_last_time">Last Update Time：</string>
-    <string name="xlistview_footer_hint_normal">Load More</string>
-    <string name="xlistview_footer_hint_ready">Loosen Loading more</string>
+    <string name="xlistview_header_hint_normal">Pull To Refresh</string>
+    <string name="xlistview_header_hint_ready">Release To Refresh</string>
+    <string name="xlistview_header_hint_loading">Loading...</string>
+    <string name="xlistview_header_last_time">Last Updated: </string>
+    <string name="xlistview_footer_hint_normal">More</string>
+    <string name="xlistview_footer_hint_ready">Release To See More</string>
     
-    
-    <string name="net_set_prompt">Set Network Prompt</string>
-    <string name="net_set_content">The network connection is unavailable, please check the network Settings, also can enter the SMS operation mode.</string>
+    <string name="net_set_prompt">Network Information</string>
+    <string name="net_set_content">Network connection is unavailable, Please check or you can use sms mode.</string>
     <string name="set_net">Network Setting</string>
     <string name="SMS_operation">SMS Operation</string>
-    <string name="account_binding">This Account Has Been Bound To Other Mobile Phones</string>
+    <string name="account_binding">This Account is already binded to other mobile phone.</string>
     <string name="version">Version</string>
     
-     <string name="january">January</string>
-    <string name="february">February</string>
-    <string name="march">March</string>
-    <string name="april">April</string>
+    <string name="january">Jan</string>
+    <string name="february">Feb</string>
+    <string name="march">Mar</string>
+    <string name="april">Apr</string>
     <string name="may">May</string>
-    <string name="june">June</string>
-    <string name="july">July</string>
-    <string name="august">August</string>
-    <string name="september">September</string>
-    <string name="october">October</string>
-    <string name="november">November</string>
-    <string name="december">December</string>
+    <string name="june">Jun</string>
+    <string name="july">Jul</string>
+    <string name="august">Aug</string>
+    <string name="september">Sep</string>
+    <string name="october">Oct</string>
+    <string name="november">Nov</string>
+    <string name="december">Dec</string>
     
-    <string name="input_data">Enter The Date</string>
-    <string name="p_m">Pairing mode,Close the connection</string>
-    <string name="connection_seccess">Connection Successful</string>
-    <string name="Connection_broken">Connection Broken</string>
-    <string name="sure_delete">Sure to delete?</string>
-    <string name="wait_connection">In Connection,Wait...</string>
-    <string name="save_data_fail">Data save failed</string>
-    <string name="close_repair_mode">Close The Repair Mode</string>
-    <string name="open_repair_mode">Open The Repair Mode</string>
-    <string name="Fuel_consumption_sensor">Fuel consumption sensor</string>
-    <string name="ODB_attachment">ODB Attachment</string>
-    <string name="remote_start">Remote Started The Attachment</string>
-	<string name="remote_start_PKE">Remote Started The Attachment Whit PKE</string>
-	<string name="The_Box_For_Prevent_Disassembly">The Box Is To Prevent Removal</string>
+    
+    <string name="input_data">Please input date</string>
+    <string name="p_m">match mode, close connection</string>
+    <string name="connection_seccess">Connected</string>
+    <string name="Connection_broken">Disconnected</string>
+    <string name="sure_delete">Confirm to remove?</string>
+    <string name="wait_connection">Waiting connection...</string>
+    <string name="save_data_fail">Save data failure</string>
+    <string name="close_repair_mode">Repair mode open</string>
+    <string name="open_repair_mode">Repair mode close</string>
+    <string name="Fuel_consumption_sensor">Fuel Sensor</string>
+	<string name="ODB_attachment">ODB Accessory</string>
+	<string name="remote_start">Remote Start Accessory</string>
+	<string name="remote_start_PKE">Remote Start Accessory With PKE</string>
+	<string name="The_Box_For_Prevent_Disassembly">Tamper Box</string>
 	<string name="clear">Clear</string>
-	<string name="clear_Deputy">Whether To Clear Deputy Tel?</string>
-	<string name="set_shock_success">Set The Shock Sensitivity Of Success</string>
-	<string name="set_shock_failed">Set The Shock Sensitivity Of Failed</string>
-	<string name="Command_prompt">Command prompt</string>
-	<string name="open_AUTOLOCK_success">Open AUTOLOCK Success</string>
-	<string name="open_AUTOLOCK_failed">Open AUTOLOCK Failed</string>
-	<string name="close_AUTOLOCK_success">Close AUTOLOCK Success</string>
-	<string name="close_AUTOLOCK_failed">Close AUTOLOCK Failed</string>
-	<string name="enter_complete">Enter Complete</string>
-	<string name="feedBack_failed">Proposal Feedback Failed</string>
-	<string name="feedBack_success">Proposal Feedback successed</string>
-	<string name="refresh_car">Refresh Car Status</string>
-	<string name="open_trunk_successed">Open The Trunk Successed</string>
-	<string name="Whether_open_trunk">Whether To Open Trunk?</string>
-	<string name="can_not_excute">The Vehicle Is Unlocked,This Operation Can Not Be Performed</string>
-	<string name="can_not_excute1">The Vehicle Is Locked,This Operation Can Not Be Performed</string>
-	<string name="Terminal_status">Terminal Status:Offline</string>
-	<string name="Terminal_status1">Terminal Status:Online</string>
-	
-	<string name="unlocked_seccess">Platform Unlock Successed</string>
-	<string name="unlocked_seccess1">Platform Remove Guard Against Successed</string>
-	<string name="unlocked_failed">Platform Unlock Failed</string>
-	<string name="unlocked_failed1">Platform Remove Guard Against Failed</string>
-	
-	<string name="locked_seccess">Platform Locked Success</string>
-	<string name="locked_seccess1">Platform Add Guard Against Successed</string>
-	<string name="locked_failed">Platform Locked Failed</string>
-	<string name="locked_failed1">Platform Add Guard Against Failed</string>
+	<string name="clear_Deputy">Confirm to clear assist number?</string>
+	<string name="set_shock_success">Setting sensitivity ok</string>
+	<string name="set_shock_failed">Setting sensitivity failed</string>
+	<string name="open_AUTOLOCK_success">Open auto-lock ok</string>
+	<string name="open_AUTOLOCK_failed">Open auto-lock failed</string>
+	<string name="close_AUTOLOCK_success">Close auto-lock ok</string>
+	<string name="close_AUTOLOCK_failed">Close auto-lock failed</string>
+	<string name="Command_prompt">Command Sending</string>
+	<string name="enter_complete">Please input completely</string>
+	<string name="feedBack_failed">Send feedback failed</string>
+	<string name="feedBack_success">Send feedback ok</string>
+	<string name="refresh_car">Refresh vehicle status...</string>
+	<string name="open_trunk_successed">Open trunk ok</string>
+	<string name="Whether_open_trunk">Confirm to open trunk?</string>
+	<string name="can_not_excute">Vehicle door is open, cannot do this operation.</string>
+	<string name="can_not_excute1">Vehicle door is close, cannot do this operation.</string>
+	<string name="Terminal_status">Status: Offline</string>
+	<string name="Terminal_status1">Status: Online</string>
+	<string name="unlocked_seccess">App unlock ok</string>
+	<string name="unlocked_seccess1">App disarm ok</string>
+	<string name="unlocked_failed">App unlock failed</string>
+	<string name="unlocked_failed1">App disarm failed</string>
 	
 	
-	<string name="start_success">Platform Start engine Successed</string>
-	<string name="start_fail">Platform Start engine Failed</string>
-	<string name="close_engine_success">Platform Stop engine Successed</string>
-	<string name="close_engine_Failed">Platform Stop engine Failed</string>
+	<string name="locked_seccess">App lock ok</string>
+	<string name="locked_seccess1">App arm ok</string>
+	<string name="locked_failed">App lock failed</string>
+	<string name="locked_failed1">App arm failed</string>
 	
-	<string name="set_Silent_mode_s">Set The Silent Mode Seccessed</string>
-	<string name="set_Silent_mode_f">Set The Silent Mode Failed</string>
-	<string name="set_Acousto_Optic_mode_f">Failed To Set The Light Mode</string>
-	<string name="set_Acousto_Optic_mode_s">Successed To Set The Light Mode</string>
-	<string name="exit_client">Do you want to exit the client?</string>
+	<string name="start_success">App start engine ok</string>
+	<string name="start_fail">App start engine failed</string>
+	<string name="close_engine_success">App stop engine ok</string>
+	<string name="close_engine_Failed">App stop engine failed</string>
 	
-	<string name="close_engine_status">The Vehicle Engine In a Stopped State, Can Not Do This</string>
-	<string name="start_status">Vehicles Starting, Can Not Do This</string>
-	<string name="remote_start_status">Vehicles Was Remote Starting, Can Not Do This</string>
+	<string name="set_Silent_mode_s">Setting silent mode ok</string>
+	<string name="set_Silent_mode_f">Setting silent mode failed</string>
+	<string name="set_Acousto_Optic_mode_f">Setting sound mode ok</string>
+	<string name="set_Acousto_Optic_mode_s">Setting sound mode failed</string>
+	<string name="exit_client">Confirm to exit the app?</string>
 	
-	<string name="send_failed">Send Failed</string>
-	<string name="driving">driving，</string>
-	<string name="statics">static，</string>
-	<string name="Blind_area">Blind Area，</string>
+	<string name="close_engine_status">Vehicle engine is in stop status, cannot do this operation.</string>
+	<string name="start_status">Vehicle engine is in start status, cannot do this operation.</string>
+	<string name="remote_start_status">Vehicle engine is in remote start status, cannot do this operation.</string>
+	
+	<string name="send_failed">Sent failed</string>
+	<string name="driving">Run, </string>
+	<string name="statics">Stop, </string>
+	<string name="Blind_area">No Network, </string>
 	<string name="Offline">Offline</string>
-	<string name="location">The Base Station Positioning</string>
-	<string name="low_power">Power Saving State</string>
-	<string name="emergency_wraning">Emergency Alarm</string>
-	<string name="The_speed_limit_wraning">Too Faster Alarm</string>
+	<string name="location">LBS</string>
+	<string name="low_power">Sleep</string>
+	<string name="emergency_wraning">SOS Alarm</string>
+	<string name="The_speed_limit_wraning">Overspeed Alarm</string>
 	<string name="vibration_wraning">Vibration Alarm</string>
-	<string name="The_displacement_wraning">The Displacement Alarm</string>
-	<string name="Guard_against_theft_wraning">Guard Against Theft Alarm</string>
-	<string name="Illegal_driving_wraning">Illegal Driving Alarm</string>
-	<string name="Into_the_fence_wraning">Into The Fence Alarm</string>
-	<string name="Out_of_the_fence_wraning">Out Of The Fence Alarm</string>
-	<string name="cut_line_wraning">Cut Line Alarm</string>
-	<string name="Low_voltage_wraning">Lower Voltage Alarm</string>
-	<string name="Gps_break_wraning">GPS Interrupt Alarm</string>
-	<string name="Fatigue_driving_wraning">Fatigue Driving Alarm</string>
-	<string name="illegal_start_engine_wraning">Illegal Start Engine Alarm</string>
-	<string name="illegal_open_door_wraning">Illegal Open Door Alarm</string>
-	<string name="Binding_mobile_phone_success">Binding Mobile Phone Success</string>
-	<string name="Cancel_the_binding_success">Remove The Binding Success</string>
-	<string name="Registration_failed">Registration Failed</string>
-	<string name="SMS_operations">Whether to use SMS operation</string>
+	<string name="The_displacement_wraning">Move Alarm</string>
+	<string name="Guard_against_theft_wraning">Car Burglar Alarm</string>
+	<string name="Illegal_driving_wraning">Invalid Driving Alarm</string>
+	<string name="Into_the_fence_wraning">Enter Geofence Alarm</string>
+	<string name="Out_of_the_fence_wraning">Exit Geofence Alarm</string>
+	<string name="cut_line_wraning">Power Cut Alarm</string>
+	<string name="Low_voltage_wraning">Low Power Alarm</string>
+	<string name="Gps_break_wraning">GPS Cut Alarm</string>
+	<string name="Fatigue_driving_wraning">Over Driver Alarm</string>
+	<string name="illegal_start_engine_wraning">Invalid Ignite Alarm</string>
+	<string name="illegal_open_door_wraning">Invalid Open Door Alarm</string>
+	<string name="Binding_mobile_phone_success">Bind to mobile phone ok</string>
+	<string name="Cancel_the_binding_success">Cancel binding to mobile phone ok</string>
+	<string name="Registration_failed">Registration failed</string>
+	<string name="SMS_operations">If use sms mode to operate？</string>
 	
-	<string name="update_soft">Software Update</string>
-	<string name="later">A Later</string>
-	<string name="blue_connect_borken">Bluetooth Disconnected,Restart Listening</string>
+	<string name="update_note">New version is available, if you want to upgrade?</string>
+	<string name="downLoad">Download</string>
+	<string name="soft_update">Software Upgrade</string>
 	
+	<string name="sms_10010">source: 10010</string>
+	<string name="sms_device">source: device</string>
+	<string name="sms_app">source: app</string>
 </resources>

@@ -7,7 +7,7 @@ public class SmsData {
 	public String msg_type;
 	public String content;
 	public String noti_id;
-	
+	public String content_en;
 	public String getLat() {
 		return lat;
 	}
@@ -43,6 +43,13 @@ public class SmsData {
 	}
 	public void setNoti_id(String noti_id) {
 		this.noti_id = noti_id;
+	}
+	
+	public String getContent_en() {
+		return content_en;
+	}
+	public void setContent_en(String content_en) {
+		this.content_en = content_en;
 	}
 	@Override
 	public String toString() {

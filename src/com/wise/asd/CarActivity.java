@@ -178,6 +178,9 @@ public class CarActivity extends Activity{
 					new Thread(new NetThread.GetDataThread(handler, url, GET_CARINFO)).start();
 				} catch (JSONException e) {
 					e.printStackTrace();
+					if(Dialog != null){
+						Dialog.dismiss();
+					}
 				}				
 				break;
 			case update_main:

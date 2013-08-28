@@ -17,7 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:text="@string/Back"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColor="#FFFFFF"
             android:background="@drawable/bt_menu_bg"/>
         <TextView
@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="@string/car_info"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 		<Button
             android:id="@+id/bt_car_save"
@@ -37,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@string/Save"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColor="#FFFFFF"
             android:background="@drawable/bt_menu_bg"/>
 	</RelativeLayout>
@@ -68,7 +68,7 @@
 					    android:id="@+id/et_car_name"
 					    android:layout_width="fill_parent"
 					    android:layout_height="40dp"
-				        android:textSize="15dp"
+				        android:textSize="14sp"
 				        android:inputType="text"
 					    android:background="@drawable/et_bg"/> 
 			    </TableRow>	
@@ -82,7 +82,7 @@
 					    android:id="@+id/et_car_info_SIM"
 					    android:layout_width="fill_parent"
 					    android:layout_height="40dp"
-				        android:textSize="15dp"
+				        android:textSize="14sp"
 				        android:inputType="number"
 				        android:enabled="false"
 					    android:background="@drawable/et_bg"/> 
@@ -110,7 +110,7 @@
 				            android:background="@drawable/et_bg"
 				            android:layout_width="fill_parent"
 				            android:layout_height="40dp"
-				            android:textSize="15dp"
+				            android:textSize="14sp"
 				            android:inputType="text"
 				            android:layout_toLeftOf="@+id/bt_car_info_deputy"/>
 				    </RelativeLayout>
@@ -125,7 +125,7 @@
 					    android:id="@+id/et_service_end"
 					    android:layout_width="fill_parent"
 					    android:layout_height="40dp"
-				        android:textSize="15dp"
+				        android:textSize="14sp"
 				        android:inputType="text"
 				        android:enabled="false"
 					    android:background="@drawable/et_bg"/> 
@@ -168,7 +168,7 @@
 				            android:background="@drawable/et_bg"
 				            android:layout_width="fill_parent"
 				            android:layout_height="40dp"
-				            android:textSize="15dp"
+				            android:textSize="14sp"
 				            android:inputType="text"
 				            android:layout_toLeftOf="@+id/iv_car_info_yearcheck_time"/>
 				    </RelativeLayout>
@@ -185,7 +185,7 @@
 					    android:id="@+id/cb_car_info_insurance"
 					    android:layout_width="wrap_content"
 					    android:layout_height="40dp"
-				        android:textSize="15dp"/>
+				        android:textSize="14sp"/>
 			    </TableRow>
 			    <TableRow android:id="@+id/tr_car_info_insurance"> 
 			        <TextView 
@@ -212,7 +212,7 @@
 				            android:background="@drawable/et_bg"
 				            android:layout_width="fill_parent"
 				            android:layout_height="40dp"
-				            android:textSize="15dp"
+				            android:textSize="14sp"
 				            android:inputType="text"
 				            android:layout_toLeftOf="@+id/iv_car_info_insurance_time"/>
 				    </RelativeLayout> 
@@ -238,7 +238,7 @@
 						    android:id="@+id/et_car_info_mileage"
 						    android:layout_width="fill_parent"
 						    android:layout_height="40dp"
-				        	android:textSize="15dp"
+				        	android:textSize="14sp"
 						    android:layout_toLeftOf="@+id/bt_carinfo_reset"
 						    android:lines="1"
 						    android:inputType="number"
@@ -270,7 +270,7 @@
 					    android:id="@+id/et_car_info_maintenance"
 					    android:layout_width="fill_parent"
 					    android:layout_height="40dp"
-				        android:textSize="15sp"
+				        android:textSize="14sp"
 				        android:inputType="number"
 					    android:background="@drawable/et_bg"/> 
 			    </TableRow>	
@@ -300,7 +300,7 @@
 			            android:layout_width="fill_parent"
 					    android:layout_height="40dp"
 					    android:text="@string/call_phones_set"
-				        android:textSize="15sp"/> 
+				        android:textSize="14sp"/> 
 			    </TableRow>
 			    <TableRow android:id="@+id/tr_terminal_info"> 
 			        <TextView 
@@ -367,7 +367,7 @@
 						    android:id="@+id/et_car_info_serial"
 						    android:layout_width="fill_parent"
 						    android:layout_height="40dp"
-					        android:textSize="15sp"
+					        android:textSize="14sp"
 					        android:inputType="number"
 					        android:layout_toLeftOf="@+id/bt_car_info_sim"
 						    android:background="@drawable/et_bg"/> 
@@ -386,7 +386,7 @@
 			            android:layout_width="fill_parent"
 					    android:layout_height="40dp"
 					    android:text="@string/bluetooth"
-				        android:textSize="15sp"/> 
+				        android:textSize="14sp"/> 
 			    </TableRow>
 	         </TableLayout>
     </ScrollView>
